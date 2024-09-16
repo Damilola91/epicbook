@@ -4,13 +4,23 @@ import NavbarCustom from './components/Navbar/Navbar'
 import WelcomeSection from './components/WelcomeSection/WelcomeSection'
 import MainSection from './components/MainSection/MainSection'
 import Footer from './components/Footer/Footer'
+import Swal from 'sweetalert2'
+
 
 const App = () => {
+
+    const notifica = () => {
+        Swal.fire("Welcome To My Page")
+    }
+
+
     return (
         <>
             <NavbarCustom />
 
-            <WelcomeSection />
+            <WelcomeSection 
+                notifica={notifica}
+            />
 
             <MainSection />
 

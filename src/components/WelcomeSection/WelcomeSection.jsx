@@ -6,7 +6,7 @@ import scifi from '../dataSource/books/scifi.json'
 import './WelcomeSection.css'
 
 
-const WelcomeSection = () => {
+const WelcomeSection = ({notifica}) => {
     const books = [...fantasy, ...history, ...horror, ...romance, ...scifi]
     const randomIndex = Math.floor(Math.random() * books.length)
     const randomBook = books[randomIndex]
@@ -28,7 +28,7 @@ const WelcomeSection = () => {
 
                         <p className="lead mb-3">{randomBook.title}</p>
 
-                        <button className="btn btn-info text-white">
+                        <button onClick={notifica} className="btn btn-info text-white">
                             Acquista a: {randomBook.price}£
                         </button>
                     </div>
