@@ -1,6 +1,12 @@
 import { Col, Container, Row } from 'react-bootstrap'
 import { navLinks } from '../../components/dataSource/navData'
-import { AccessibilityOutline } from 'react-ionicons'
+import {
+    AccessibilityOutline,
+    AtOutline,
+    LogoInstagram,
+    LogoTiktok,
+    LogoTwitter,
+} from 'react-ionicons'
 
 const Footer = () => {
     return (
@@ -25,22 +31,22 @@ const Footer = () => {
                             </div>
 
                             <div className="d-flex gap-3 align-items-center justify-content-center">
-                                <AccessibilityOutline
-                                    color={'#00000'}
+                                <LogoTwitter
+                                    color="white"
                                     title="A"
                                     height="40px"
                                     width="40px"
                                 />
 
-                                <AccessibilityOutline
-                                    color={'#00000'}
+                                <LogoTiktok
+                                    color="white"
                                     title="B"
                                     height="40px"
                                     width="40px"
                                 />
 
-                                <AccessibilityOutline
-                                    color={'#00000'}
+                                <LogoInstagram
+                                    color="white"
                                     title="C"
                                     height="40px"
                                     width="40px"
