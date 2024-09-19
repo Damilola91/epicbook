@@ -5,7 +5,7 @@ import romance from '../dataSource/books/romance.json'
 import scifi from '../dataSource/books/scifi.json'
 import './WelcomeSection.css'
 
-const WelcomeSection = ({ notifica }) => {
+const WelcomeSection = ({ sweetAlert }) => {
     const books = [...fantasy, ...history, ...horror, ...romance, ...scifi]
     const randomIndex = Math.floor(Math.random() * books.length)
     const randomBook = books[randomIndex]
@@ -29,7 +29,7 @@ const WelcomeSection = ({ notifica }) => {
 
                         <div className="d-flex justify-content-center align-items-center gap-3">
                             <button
-                                onClick={notifica}
+                                onClick={sweetAlert}
                                 className="btn btn-info text-white"
                             >
                                 Acquista a: {randomBook.price}£
