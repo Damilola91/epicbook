@@ -12,6 +12,7 @@ const MainSection = ({ books }) => {
                         price={book.price}
                         category={book.category}
                         img={book.img}
+                        asin={book.asin}
                     />
                 ))}
             </Row>

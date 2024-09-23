@@ -18,9 +18,9 @@ const App = () => {
     // Gestione dello stato dei libri centralizzata qui
     const allBooks = [...fantasy, ...history, ...romance, ...horror, ...scifi]
     const randomBooks = allBooks.sort(() => Math.random() - 0.5)
-    const [books, setBooks] = useState(randomBooks)
-    const [totalBooks] = useState(randomBooks)
-    const [inputValue, setInputValue] = useState("")
+    const [books, setBooks] = useState(allBooks)
+    const [totalBooks] = useState(allBooks)
+    const [inputValue, setInputValue] = useState('')
 
     const sweetAlert = () => {
         Swal.fire('Welcome To My Page')
@@ -31,13 +31,13 @@ const App = () => {
     }
 
     const filteredBook = () => {
-        if (inputValue === "") {
-            setBooks(totalBooks)  // Ripristina tutti i libri
+        if (inputValue === '') {
+            setBooks(totalBooks) // Ripristina tutti i libri
         } else {
             const filterBook = totalBooks.filter((book) =>
                 book.title.toLowerCase().includes(inputValue.toLowerCase())
             )
-            setBooks(filterBook)  // Filtra i libri
+            setBooks(filterBook) // Filtra i libri
         }
     }
 
