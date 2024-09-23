@@ -7,7 +7,7 @@ import RatingArea from '../RatingArea/RatingArea'
 import AllComments from '../AllCommets/AllComments'
 import EditComment from '../EditComment/EditComment'
 
-const BookCard = ({ price, category, title, img, asin }) => {
+const BookCard = ({ price, category, title, img, asin, _id }) => {
     const [isSelected, setIsSelected] = useState(false)
     const [showCommentArea, setShowCommentArea] = useState(false)
     const [isCommentsVisible, setIsCommentsVisible] = useState(false)
@@ -90,6 +90,7 @@ const BookCard = ({ price, category, title, img, asin }) => {
                     isModalVisible={isModalVisible}
                     setIsModalVisible={setIsModalVisible}
                     asin={asin}
+                    _id={_id}
                 />
             )}
         </>

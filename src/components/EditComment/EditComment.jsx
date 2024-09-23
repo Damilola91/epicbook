@@ -3,14 +3,14 @@ import Swal from 'sweetalert2'
 import { APIKEY } from '../../constants'
 import { Modal, Form, Button } from 'react-bootstrap'
 
-const EditComment = ({ isModalVisible, setIsModalVisible, asin }) => {
+const EditComment = ({ isModalVisible, setIsModalVisible, asin, _id }) => {
     const [modalFormState, setModalFormState] = useState({
         rate: '',
         comment: '',
         elementId: asin,
     })
 
-    const endPointEdit = `https://striveschool-api.herokuapp.com/api/comments/${asin}`
+    const endPointEdit = `https://striveschool-api.herokuapp.com/api/comments/${_id}`
 
     const closeModalArea = () => {
         setIsModalVisible(false)
@@ -40,6 +40,10 @@ const EditComment = ({ isModalVisible, setIsModalVisible, asin }) => {
 
         if (result.isConfirmed) {
             try {
+                if (!_id || !asin) {
+                    Swal.fire('Error!', 'Invalid comment ID or asin', 'error')
+                    return
+                }
                 const response = await fetch(endPointEdit, {
                     method: 'PUT',
                     headers: {
@@ -55,7 +59,6 @@ const EditComment = ({ isModalVisible, setIsModalVisible, asin }) => {
                     setModalFormState({
                         rate: '',
                         comment: '',
-                        elementId: asin,
                     })
                 } else {
                     Swal.fire('Error!', 'Something went wrong.', 'error')
@@ -84,6 +87,7 @@ const EditComment = ({ isModalVisible, setIsModalVisible, asin }) => {
                         name="rate"
                         onChange={handleInputChange}
                         placeholder="Rate"
+                        value={modalFormState.rate}
                     />
 
                     <Form.Control
@@ -92,6 +96,7 @@ const EditComment = ({ isModalVisible, setIsModalVisible, asin }) => {
                         name="comment"
                         onChange={handleInputChange}
                         placeholder="Comment"
+                        value={modalFormState.comment}
                     />
 
                     <Button type="submit" variant="success">

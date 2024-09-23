@@ -5,16 +5,20 @@ const MainSection = ({ books }) => {
     return (
         <Container>
             <Row className="gy-2">
-                {books && books.slice(0, 60).map((book) => (
-                    <BookCard
-                        key={book.asin}
-                        title={book.title}
-                        price={book.price}
-                        category={book.category}
-                        img={book.img}
-                        asin={book.asin}
-                    />
-                ))}
+                {books &&
+                    books
+                        .slice(0, 60)
+                        .map((book) => (
+                            <BookCard
+                                key={book.asin}
+                                title={book.title}
+                                price={book.price}
+                                category={book.category}
+                                img={book.img}
+                                asin={book.asin}
+                                _id={book._id}
+                            />
+                        ))}
             </Row>
         </Container>
     )
