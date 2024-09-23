@@ -18,8 +18,9 @@ const App = () => {
     // Gestione dello stato dei libri centralizzata qui
     const allBooks = [...fantasy, ...history, ...romance, ...horror, ...scifi]
     const randomBooks = allBooks.sort(() => Math.random() - 0.5)
-    const [books, setBooks] = useState(allBooks)
-    const [totalBooks] = useState(allBooks)
+    const fantasy4 = fantasy
+    const [books, setBooks] = useState(fantasy4)
+    const [totalBooks] = useState(fantasy4)
     const [inputValue, setInputValue] = useState('')
 
     const sweetAlert = () => {

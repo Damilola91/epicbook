@@ -3,17 +3,11 @@ import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import './BookCard.css'
 import { useState } from 'react'
-import RatingArea from '../RatingArea/RatingArea'
 import AllComments from '../AllCommets/AllComments'
-import EditComment from '../EditComment/EditComment'
 
-const BookCard = ({ price, category, title, img, asin, _id }) => {
+const BookCard = ({ price, category, title, img, asin }) => {
     const [isSelected, setIsSelected] = useState(false)
-    const [showCommentArea, setShowCommentArea] = useState(false)
     const [isCommentsVisible, setIsCommentsVisible] = useState(false)
-    const [isModalVisible, setIsModalVisible] = useState(false)
-
-    const toggleShowCommentArea = () => setShowCommentArea(!showCommentArea)
 
     const toggleIsSelect = () => {
         setIsSelected(!isSelected)
@@ -23,17 +17,7 @@ const BookCard = ({ price, category, title, img, asin, _id }) => {
         setIsCommentsVisible(true)
     }
 
-    const openEditCommentModal = () => {
-        setIsModalVisible(true)
-    }
-
-    const toggleHideCommentArea = () => {
-        setShowCommentArea(false)
-    }
-
     const selectedCardStyle = isSelected ? 'border-5 border-danger' : ''
-
-    console.log(isSelected)
 
     return (
         <>
@@ -50,7 +34,6 @@ const BookCard = ({ price, category, title, img, asin, _id }) => {
                     <Card.Body>
                         <Card.Title>{category}</Card.Title>
                         <Card.Text className="text-truncate">{title}</Card.Text>
-
                         <Card.Text>{price}£</Card.Text>
                         <div className="d-flex justify-content-between">
                             <Button
@@ -59,20 +42,7 @@ const BookCard = ({ price, category, title, img, asin, _id }) => {
                             >
                                 Commenti
                             </Button>
-                            <Button
-                                onClick={toggleShowCommentArea}
-                                variant="warning text-white"
-                            >
-                                Aggiungi Commento
-                            </Button>
                         </div>
-                        {showCommentArea && (
-                            <RatingArea
-                                asin={asin}
-                                onHide={toggleHideCommentArea}
-                                onEditComment={openEditCommentModal}
-                            />
-                        )}
                     </Card.Body>
                 </Card>
             </Col>
@@ -82,15 +52,6 @@ const BookCard = ({ price, category, title, img, asin, _id }) => {
                     isCommentsVisible={isCommentsVisible}
                     setIsCommentsVisible={setIsCommentsVisible}
                     asin={asin}
-                />
-            )}
-
-            {isModalVisible && (
-                <EditComment
-                    isModalVisible={isModalVisible}
-                    setIsModalVisible={setIsModalVisible}
-                    asin={asin}
-                    _id={_id}
                 />
             )}
         </>

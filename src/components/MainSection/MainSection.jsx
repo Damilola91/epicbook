@@ -7,7 +7,7 @@ const MainSection = ({ books }) => {
             <Row className="gy-2">
                 {books &&
                     books
-                        .slice(0, 60)
+                        .slice(0, 20)
                         .map((book) => (
                             <BookCard
                                 key={book.asin}
