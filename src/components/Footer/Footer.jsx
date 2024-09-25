@@ -1,12 +1,6 @@
 import { Col, Container, Row } from 'react-bootstrap'
 import { navLinks } from '../../components/dataSource/navData'
-import {
-    AccessibilityOutline,
-    AtOutline,
-    LogoInstagram,
-    LogoTiktok,
-    LogoTwitter,
-} from 'react-ionicons'
+import { LogoInstagram, LogoTiktok, LogoTwitter } from 'react-ionicons'
 import { useContext } from 'react'
 import { ThemeContext } from '../contexts/ThemeContext'
 
