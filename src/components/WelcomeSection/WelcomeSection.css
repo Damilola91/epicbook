@@ -2,3 +2,15 @@
     height: 500px;
     width: 333px;
 }
+
+.dark-bg {
+    background-color: #333; /* Colore di sfondo per dark mode */
+}
+
+.text-light {
+    color: white; /* Colore del testo per dark mode */
+}
+
+.text-dark {
+    color: black; /* Colore del testo per light mode */
+}

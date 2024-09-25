@@ -1,38 +1,41 @@
-import fantasy from '../dataSource/books/fantasy.json'
-import history from '../dataSource/books/history.json'
-import horror from '../dataSource/books/horror.json'
-import romance from '../dataSource/books/romance.json'
-import scifi from '../dataSource/books/scifi.json'
+import { useContext } from 'react'
+import { BookContext } from '../contexts/BookContext'
 import './WelcomeSection.css'
+import { ThemeContext } from '../contexts/ThemeContext'
 
 const WelcomeSection = ({ sweetAlert }) => {
-    const books = [...fantasy, ...history, ...horror, ...romance, ...scifi]
+    const { books } = useContext(BookContext)
+    const { isDarkMode } = useContext(ThemeContext)
+
     const randomIndex = Math.floor(Math.random() * books.length)
     const randomBook = books[randomIndex]
-    console.log(randomBook)
 
     return (
-        <div className="bg-light text-center py-5">
+        <div
+            className={` text-center py-5 ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
+        >
             <div className="container  pt-5 pb-5">
                 <div className="row pt-5 pb-5">
                     <div className="col-lg-12 col-xl-12 ms-auto pb-5 pt-5">
-                        <span>{randomBook.category}</span>
-                        <h1 className="display-3 fw-bold mb-3">
+                        <span>{randomBook?.category}</span>
+                        <h1
+                            className={`display-3 fw-bold mb-3 ${isDarkMode ? 'text-light' : 'text-dark'}`}
+                        >
                             Libro Del Giorno
                         </h1>
 
                         <div className="custom-img">
-                            <img src={randomBook.img} alt="imagine" />
+                            <img src={randomBook?.img} alt="imagine" />
                         </div>
 
-                        <p className="lead mb-3">{randomBook.title}</p>
+                        <p className="lead mb-3">{randomBook?.title}</p>
 
                         <div className="d-flex justify-content-center align-items-center gap-3">
                             <button
                                 onClick={sweetAlert}
                                 className="btn btn-info text-white"
                             >
-                                Acquista a: {randomBook.price}£
+                                Acquista a: {randomBook?.price}£
                             </button>
 
                             <button className="btn btn-warning text-white">

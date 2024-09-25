@@ -14,6 +14,7 @@ const AllComments = ({ isCommentsVisible, setIsCommentsVisible, asin }) => {
         rate: '',
         comment: '',
         id: null, // per tenere traccia dell'ID del commento da modificare
+        elementId: asin,
     })
 
     const handleInputChange = (e) => {
@@ -75,7 +76,12 @@ const AllComments = ({ isCommentsVisible, setIsCommentsVisible, asin }) => {
 
                 if (response.ok) {
                     Swal.fire('Saved!', '', 'success')
-                    setModalFormState({ rate: '', comment: '', id: null })
+                    setModalFormState({
+                        rate: '',
+                        comment: '',
+                        id: null,
+                        elementId: asin,
+                    })
                     getRatings() // Ricarica i commenti aggiornati
                 } else {
                     Swal.fire('Error!', 'Something went wrong.', 'error')
