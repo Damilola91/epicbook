@@ -2,12 +2,14 @@ import { Col } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import './BookCard.css'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import AllComments from '../AllCommets/AllComments'
+import { ThemeContext } from '../contexts/ThemeContext'
 
 const BookCard = ({ price, category, title, img, asin }) => {
     const [isSelected, setIsSelected] = useState(false)
     const [isCommentsVisible, setIsCommentsVisible] = useState(false)
+    const { isDarkMode } = useContext(ThemeContext)
 
     const toggleIsSelect = () => {
         setIsSelected(!isSelected)
@@ -23,7 +25,7 @@ const BookCard = ({ price, category, title, img, asin }) => {
         <>
             <Col sm={12} md={4} lg={3}>
                 <Card
-                    className={`h-100 custom ${selectedCardStyle}`}
+                    className={`h-100 custom ${isDarkMode ? 'border-3 white' : ''} ${selectedCardStyle}`}
                     onClick={toggleIsSelect}
                 >
                     <Card.Img
@@ -31,7 +33,13 @@ const BookCard = ({ price, category, title, img, asin }) => {
                         className="h-100 w-100 object-fit-cover custom-img"
                         src={img}
                     />
-                    <Card.Body>
+                    <Card.Body
+                        className={
+                            isDarkMode
+                                ? 'bg-dark text-light'
+                                : 'bg-light text-dark'
+                        }
+                    >
                         <Card.Title>{category}</Card.Title>
                         <Card.Text className="text-truncate">{title}</Card.Text>
                         <Card.Text>{price}£</Card.Text>

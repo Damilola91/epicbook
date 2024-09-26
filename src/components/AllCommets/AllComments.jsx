@@ -1,9 +1,12 @@
 import { Button, ListGroup, Modal, Form } from 'react-bootstrap'
 import { APIKEY } from '../../constants'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
+import { ThemeContext } from '../contexts/ThemeContext'
 
 const AllComments = ({ isCommentsVisible, setIsCommentsVisible, asin }) => {
+    const { isDarkMode } = useContext(ThemeContext)
+
     const closeModal = () => {
         setIsCommentsVisible(false)
     }
@@ -144,10 +147,13 @@ const AllComments = ({ isCommentsVisible, setIsCommentsVisible, asin }) => {
 
     return (
         <Modal show={isCommentsVisible} onHide={closeModal}>
-            <Modal.Header closeButton>
+            <Modal.Header
+                closeButton
+                className={isDarkMode ? 'bg-dark text-white' : ''}
+            >
                 <Modal.Title>Comments</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className={isDarkMode ? 'bg-dark text-white' : ''}>
                 <ListGroup variant="flush">
                     {comments.length > 0 ? (
                         comments.map((comment) => (
@@ -216,7 +222,7 @@ const AllComments = ({ isCommentsVisible, setIsCommentsVisible, asin }) => {
                     </Button>
                 </Form>
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className={isDarkMode ? 'bg-dark text-white' : ''}>
                 <Button onClick={closeModal} variant="danger">
                     Chiudi
                 </Button>

@@ -9,7 +9,7 @@ const MainSection = () => {
     const { isDarkMode } = useContext(ThemeContext)
 
     return (
-        <div
+        <main
             className={isDarkMode ? 'bg-dark text-light' : 'bg-light text-dark'}
         >
             <Container>
@@ -29,7 +29,7 @@ const MainSection = () => {
                             ))}
                 </Row>
             </Container>
-        </div>
+        </main>
     )
 }
 

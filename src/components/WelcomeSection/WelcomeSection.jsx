@@ -17,7 +17,11 @@ const WelcomeSection = ({ sweetAlert }) => {
             <div className="container  pt-5 pb-5">
                 <div className="row pt-5 pb-5">
                     <div className="col-lg-12 col-xl-12 ms-auto pb-5 pt-5">
-                        <span>{randomBook?.category}</span>
+                        <span
+                            className={isDarkMode ? 'text-light' : 'text-dark'}
+                        >
+                            {randomBook?.category}
+                        </span>
                         <h1
                             className={`display-3 fw-bold mb-3 ${isDarkMode ? 'text-light' : 'text-dark'}`}
                         >
@@ -28,7 +32,11 @@ const WelcomeSection = ({ sweetAlert }) => {
                             <img src={randomBook?.img} alt="imagine" />
                         </div>
 
-                        <p className="lead mb-3">{randomBook?.title}</p>
+                        <p
+                            className={`lead mb-3 ${isDarkMode ? 'text-light' : 'text-dark'}`}
+                        >
+                            {randomBook?.title}
+                        </p>
 
                         <div className="d-flex justify-content-center align-items-center gap-3">
                             <button
