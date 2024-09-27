@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { BookContext } from '../contexts/BookContext'
 import './WelcomeSection.css'
 import { ThemeContext } from '../contexts/ThemeContext'
@@ -6,9 +6,12 @@ import { ThemeContext } from '../contexts/ThemeContext'
 const WelcomeSection = ({ sweetAlert }) => {
     const { books } = useContext(BookContext)
     const { isDarkMode } = useContext(ThemeContext)
+    const [randomBook, setRandomBook] = useState(null)
 
-    const randomIndex = Math.floor(Math.random() * books.length)
-    const randomBook = books[randomIndex]
+    useEffect(() => {
+        const randomIndex = Math.floor(Math.random() * books.length)
+        setRandomBook(books[randomIndex])
+    }, [])
 
     return (
         <div

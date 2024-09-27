@@ -2,7 +2,7 @@
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 2;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .custom:hover {
@@ -10,3 +10,65 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+
+.custom-img {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    object-fit: cover;
+}
+
+
+.custom-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.custom-button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+    background-color: #0056b3;
+}
+
+.bg-dark.custom {
+    background-color: #333;
+    color: #fff;
+    border-color: #444;
+}
+
+.bg-dark.custom:hover {
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
+}
+
+
+.custom-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.custom-text {
+    font-size: 1rem;
+    color: #666;
+}
+
+.text-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+    .custom {
+        margin-bottom: 20px;
+    }
+    .custom-img {
+        height: auto;
+    }
+}

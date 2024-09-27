@@ -30,23 +30,28 @@ const BookCard = ({ price, category, title, img, asin }) => {
                 >
                     <Card.Img
                         variant="top"
-                        className="h-100 w-100 object-fit-cover custom-img"
+                        className="h-75 w-100 object-fit-cover custom-img"
                         src={img}
                     />
                     <Card.Body
-                        className={
+                        className={` custom-body ${
                             isDarkMode
                                 ? 'bg-dark text-light'
                                 : 'bg-light text-dark'
-                        }
+                        }`}
                     >
-                        <Card.Title>{category}</Card.Title>
-                        <Card.Text className="text-truncate">{title}</Card.Text>
+                        <Card.Title className="custom-title">
+                            {category}
+                        </Card.Title>
+                        <Card.Text className="text-truncate custom-text">
+                            {title}
+                        </Card.Text>
                         <Card.Text>{price}£</Card.Text>
                         <div className="d-flex justify-content-between">
                             <Button
                                 onClick={openCommentsModal}
                                 variant="primary"
+                                className="custom-button"
                             >
                                 Commenti
                             </Button>
