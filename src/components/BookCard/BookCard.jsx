@@ -5,20 +5,23 @@ import './BookCard.css'
 import { useContext, useState } from 'react'
 import AllComments from '../AllCommets/AllComments'
 import { ThemeContext } from '../contexts/ThemeContext'
+import { CommentSelectedCard } from '../contexts/CommentSelectedCard'
 
 const BookCard = ({ price, category, title, img, asin }) => {
-    const [isSelected, setIsSelected] = useState(false)
+    const { selectedCardAsin, toggleIsSelect } = useContext(CommentSelectedCard)
+
     const [isCommentsVisible, setIsCommentsVisible] = useState(false)
     const { isDarkMode } = useContext(ThemeContext)
-
-    const toggleIsSelect = () => {
-        setIsSelected(!isSelected)
-    }
 
     const openCommentsModal = () => {
         setIsCommentsVisible(true)
     }
 
+    const closeModal = () => {
+        setIsCommentsVisible(false)
+    }
+
+    const isSelected = selectedCardAsin === asin
     const selectedCardStyle = isSelected ? 'border-5 border-danger' : ''
 
     return (
@@ -26,7 +29,7 @@ const BookCard = ({ price, category, title, img, asin }) => {
             <Col sm={12} md={4} lg={3}>
                 <Card
                     className={`h-100 custom ${isDarkMode ? 'border-3 white' : ''} ${selectedCardStyle}`}
-                    onClick={toggleIsSelect}
+                    onClick={() => toggleIsSelect(asin)}
                 >
                     <Card.Img
                         variant="top"
@@ -62,9 +65,10 @@ const BookCard = ({ price, category, title, img, asin }) => {
 
             {isCommentsVisible && (
                 <AllComments
-                    isCommentsVisible={isCommentsVisible}
-                    setIsCommentsVisible={setIsCommentsVisible}
+                    onClose={closeModal}
                     asin={asin}
+                    setIsCommentsVisible={setIsCommentsVisible}
+                    isCommentsVisible={isCommentsVisible}
                 />
             )}
         </>

@@ -48,6 +48,19 @@ const AllComments = ({ isCommentsVisible, setIsCommentsVisible, asin }) => {
         }
     }
 
+    useEffect(() => {
+        let isMounted = true // Flag di montaggio
+
+        if (isCommentsVisible && isMounted) {
+            getRatings()
+        }
+
+        // Pulizia dell'effetto
+        return () => {
+            isMounted = false
+        }
+    }, [asin, isCommentsVisible])
+
     const addOrUpdateComment = async (e) => {
         e.preventDefault()
         const endpoint = modalFormState.id
@@ -141,12 +154,8 @@ const AllComments = ({ isCommentsVisible, setIsCommentsVisible, asin }) => {
         }
     }
 
-    useEffect(() => {
-        getRatings()
-    }, [asin])
-
     return (
-        <Modal show={isCommentsVisible} onHide={closeModal}>
+        <Modal show={true} onHide={closeModal}>
             <Modal.Header
                 closeButton
                 className={isDarkMode ? 'bg-dark text-white' : ''}
