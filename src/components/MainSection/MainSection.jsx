@@ -3,10 +3,13 @@ import BookCard from '../BookCard/BookCard'
 import { useContext } from 'react'
 import { BookContext } from '../contexts/BookContext'
 import { ThemeContext } from '../contexts/ThemeContext'
+import { CommentSelectedCard } from '../contexts/CommentSelectedCard'
+import AllComments from '../AllCommets/AllComments'
 
 const MainSection = () => {
     const { books } = useContext(BookContext)
     const { isDarkMode } = useContext(ThemeContext)
+    const { selectedCardAsin } = useContext(CommentSelectedCard)
 
     return (
         <main
@@ -36,6 +39,10 @@ const MainSection = () => {
                         <h3>
                             <strong>Comments</strong>
                         </h3>
+
+                        {selectedCardAsin && (
+                            <AllComments asin={selectedCardAsin} />
+                        )}
                     </Col>
                 </Row>
             </Container>
