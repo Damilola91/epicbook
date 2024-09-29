@@ -26,7 +26,7 @@ const BookCard = ({ price, category, title, img, asin }) => {
 
     return (
         <>
-            <Col sm={12} md={4} lg={3}>
+            <Col sm={12} md={6} lg={4}>
                 <Card
                     className={`h-100 custom ${isDarkMode ? 'border-3 white' : ''} ${selectedCardStyle}`}
                     onClick={() => toggleIsSelect(asin)}
