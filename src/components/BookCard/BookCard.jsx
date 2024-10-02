@@ -1,13 +1,19 @@
-import { Col } from 'react-bootstrap'
+import { Button, Col } from 'react-bootstrap'
 import Card from 'react-bootstrap/Card'
 import './BookCard.css'
 import { useContext, useState } from 'react'
 import { ThemeContext } from '../contexts/ThemeContext'
 import { CommentSelectedCard } from '../contexts/CommentSelectedCard'
+import { useNavigate } from 'react-router-dom'
 
 const BookCard = ({ price, category, title, img, asin }) => {
     const { selectedCardAsin, toggleIsSelect } = useContext(CommentSelectedCard)
     const { isDarkMode } = useContext(ThemeContext)
+    const navigate = useNavigate()
+
+    const handleRedirectDetails = () => {
+        navigate(`/book/${asin}`)
+    }
 
     const isSelected = selectedCardAsin === asin
     const selectedCardStyle = isSelected ? 'border-5 border-danger' : ''
@@ -33,6 +39,12 @@ const BookCard = ({ price, category, title, img, asin }) => {
                         {title}
                     </Card.Text>
                     <Card.Text>{price}£</Card.Text>
+                    <Button
+                        onClick={handleRedirectDetails}
+                        className="custom-button btn"
+                    >
+                        Details
+                    </Button>
                 </Card.Body>
             </Card>
         </Col>

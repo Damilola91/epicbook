@@ -129,7 +129,7 @@ const AllComments = ({ asin }) => {
 
                 if (response.ok) {
                     Swal.fire('Deleted!', '', 'success')
-                    getRatings() // Ricarica i commenti dopo la cancellazione
+                    getRatings()
                 } else {
                     Swal.fire('Error!', 'Unable to delete comment.', 'error')
                 }

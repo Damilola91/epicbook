@@ -1,6 +1,6 @@
 import { Col, Container, Row } from 'react-bootstrap'
 import BookCard from '../BookCard/BookCard'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { BookContext } from '../contexts/BookContext'
 import { ThemeContext } from '../contexts/ThemeContext'
 import { CommentSelectedCard } from '../contexts/CommentSelectedCard'
@@ -9,7 +9,12 @@ import AllComments from '../AllCommets/AllComments'
 const MainSection = () => {
     const { books } = useContext(BookContext)
     const { isDarkMode } = useContext(ThemeContext)
-    const { selectedCardAsin } = useContext(CommentSelectedCard)
+    const { selectedCardAsin, setSelectedCardAsin, toggleIsSelect } =
+        useContext(CommentSelectedCard)
+
+    useEffect(() => {
+        setSelectedCardAsin(null)
+    }, [])
 
     return (
         <main

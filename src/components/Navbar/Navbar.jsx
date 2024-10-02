@@ -6,6 +6,7 @@ import { Button, Col, Form, Row } from 'react-bootstrap'
 import { useContext } from 'react'
 import { BookContext } from '../contexts/BookContext'
 import { ThemeContext } from '../contexts/ThemeContext'
+import { Link } from 'react-router-dom'
 
 const NavbarCustom = () => {
     const { inputValue, handleInputChange, handleSubmitForm } =
@@ -27,10 +28,17 @@ const NavbarCustom = () => {
                 >
                     {isDarkMode ? 'Light Mode' : 'Dark Mode'}
                 </Button>
-                <Navbar.Brand href="#">EpicBook</Navbar.Brand>
+                <Navbar.Brand>
+                    <Link
+                        to="/"
+                        style={{ textDecoration: 'none', color: 'inherit' }}
+                    >
+                        EpicBook
+                    </Link>
+                </Navbar.Brand>
                 <Nav className="me-auto">
                     {navLinks.map((link) => (
-                        <Nav.Link href={link.href} key={link.href}>
+                        <Nav.Link as={Link} to={link.to} key={link.to}>
                             {link.text}
                         </Nav.Link>
                     ))}

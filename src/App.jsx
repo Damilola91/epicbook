@@ -1,23 +1,23 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
-import NavbarCustom from '../src/components/Navbar/Navbar'
-import Footer from '../src/components/Footer/Footer'
-import WelcomeSection from '../src/components/WelcomeSection/WelcomeSection'
-import MainSection from '../src/components/MainSection/MainSection'
-import Swal from 'sweetalert2'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import HomePage from './pages/HomePage/HomePage'
+import About from './pages/About/About'
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
+import BookOfTheDay from './pages/BookOfTheDay/BookOfTheDay'
+import BookDetails from './pages/BookDetails/BookDetails'
 
 const App = () => {
-    const sweetAlert = () => {
-        Swal.fire('Welcome To My Page')
-    }
-
     return (
-        <>
-            <NavbarCustom />
-            <WelcomeSection sweetAlert={sweetAlert} />
-            <MainSection />
-            <Footer />
-        </>
+        <BrowserRouter>
+            <Routes>
+                <Route exact path="/" element={<HomePage />} />
+                <Route path="/bookDay" element={<BookOfTheDay />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/book/:bookId" element={<BookDetails />} />
+                <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+        </BrowserRouter>
     )
 }
 

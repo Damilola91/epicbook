@@ -10,7 +10,7 @@ export const CommentSelectedCardProvider = ({ children }) => {
 
     return (
         <CommentSelectedCard.Provider
-            value={{ selectedCardAsin, toggleIsSelect }}
+            value={{ selectedCardAsin, toggleIsSelect, setSelectedCardAsin }}
         >
             {children}
         </CommentSelectedCard.Provider>
