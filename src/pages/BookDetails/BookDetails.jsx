@@ -1,11 +1,12 @@
 import Footer from '../../components/Footer/Footer'
 import NavbarCustom from '../../components/Navbar/Navbar'
 import { Col, Container, Row, Card } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
 import { BookContext } from '../../components/contexts/BookContext'
 import { APIKEY } from '../../constants'
 import { ThemeContext } from '../../components/contexts/ThemeContext'
+import '../BookDetails/BookDetails.css'
 
 const BookDetails = () => {
     const { bookId } = useParams()
@@ -13,6 +14,10 @@ const BookDetails = () => {
     const selectedBook = books.find((book) => book.asin === bookId)
     const [comments, setComments] = useState([])
     const { isDarkMode } = useContext(ThemeContext)
+    const [query, setQuery] = useSearchParams()
+    console.log(query)
+    const params = Object.fromEntries([...query]) //crea un oggetto da ciò che trova in quell'array
+    console.log(params)
 
     const ENDPOINTGET = `https://striveschool-api.herokuapp.com/api/books/${bookId}/comments/`
 
@@ -44,28 +49,28 @@ const BookDetails = () => {
             <NavbarCustom />
             <Container
                 fluid
-                className={
-                    isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark'
-                }
+                className={`book-details-container  ${isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark'}`}
             >
-                <Row>
+                <Row className="justify-content-center">
                     {selectedBook ? (
                         <>
-                            <Col sm={6} md={6} lg={6}>
-                                <Card className="h-100">
+                            <Col sm={12} md={6} lg={5}>
+                                <Card className="book-card shadow-sm">
                                     <Card.Img
                                         variant="top"
                                         src={selectedBook.img}
-                                        className="h-75 w-100 object-fit-cover"
+                                        className="book-img"
                                     />
                                     <Card.Body>
-                                        <Card.Title>
+                                        <Card.Title className="book-title">
                                             {selectedBook.title}
                                         </Card.Title>
                                         <Card.Text>
+                                            <strong>Category:</strong>{' '}
                                             {selectedBook.category}
                                         </Card.Text>
                                         <Card.Text>
+                                            <strong>Price:</strong>{' '}
                                             {selectedBook.price}£
                                         </Card.Text>
                                         <Card.Text>
@@ -74,27 +79,36 @@ const BookDetails = () => {
                                     </Card.Body>
                                 </Card>
                             </Col>
-
-                            <Col sm={6} md={6} lg={6}>
-                                <div>
-                                    <h1>Comments</h1>
-                                    <div className="mt-1">
-                                        {comments.length > 0 ? (
-                                            comments.map((comment) => (
-                                                <p key={comment._id}>
-                                                    {comment.comment} - Rating:{' '}
-                                                    {comment.rate}
+                            <Col sm={12} md={6} lg={4}>
+                                <Card className="comments-card shadow-sm">
+                                    <Card.Body>
+                                        <h5 className="comments-title">
+                                            Comments
+                                        </h5>
+                                        <div className="comments-section">
+                                            {comments.length > 0 ? (
+                                                comments.map((comment) => (
+                                                    <p
+                                                        key={comment._id}
+                                                        className="comment"
+                                                    >
+                                                        {comment.comment} -{' '}
+                                                        <strong>Rating:</strong>{' '}
+                                                        {comment.rate}
+                                                    </p>
+                                                ))
+                                            ) : (
+                                                <p className="no-comments">
+                                                    No comments available
                                                 </p>
-                                            ))
-                                        ) : (
-                                            <p>No comments available</p>
-                                        )}
-                                    </div>
-                                </div>
+                                            )}
+                                        </div>
+                                    </Card.Body>
+                                </Card>
                             </Col>
                         </>
                     ) : (
-                        <p>Nessun libro selezionato.</p>
+                        <p>No book selected.</p>
                     )}
                 </Row>
             </Container>

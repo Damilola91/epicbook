@@ -1,0 +1,66 @@
+.book-details-container {
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+/* Stile per la card del libro */
+.book-card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.book-card:hover {
+    transform: translateY(-10px);
+}
+
+.book-img {
+    height: 350px;
+    object-fit: cover;
+}
+
+.book-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Stile per la card dei commenti */
+.comments-card {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.comments-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.comments-section {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.comment {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.no-comments {
+    color: #777;
+    font-style: italic;
+}
+
+/* Modalità scura */
+.bg-dark .comments-card {
+    background-color: #333;
+    color: #fff;
+    border: none;
+}
+
+.bg-dark .book-card {
+    background-color: #444;
+    color: #fff;
+}

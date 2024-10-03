@@ -10,9 +10,8 @@ const BookCard = ({ price, category, title, img, asin }) => {
     const { selectedCardAsin, toggleIsSelect } = useContext(CommentSelectedCard)
     const { isDarkMode } = useContext(ThemeContext)
     const navigate = useNavigate()
-
     const handleRedirectDetails = () => {
-        navigate(`/book/${asin}`)
+        navigate(`/book/${asin}?title=${title}&test=true`)
     }
 
     const isSelected = selectedCardAsin === asin

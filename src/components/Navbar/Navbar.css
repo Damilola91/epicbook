@@ -1,0 +1,110 @@
+.navbar {
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Stile per il logo del brand */
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-brand:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+/* Stile per i link della navbar */
+.nav-link {
+    font-size: 1rem;
+    color: lightcyan;
+    transition: color 0.3s ease-in-out;
+    margin-right: 10px;
+}
+
+.nav-link:hover {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.navbar-dark .nav-link {
+    color: #fff;
+}
+
+.navbar-dark .nav-link:hover {
+    color: #86c5ff;
+}
+
+/* Pulsante per cambiare tema */
+.btn-info {
+    background-color: #17a2b8;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+
+/* Stile per il form di ricerca */
+.form-inline {
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 200px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #0056b3;
+    outline: none;
+    box-shadow: none;
+}
+
+/* Pulsante di invio */
+.btn-success {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-success:hover {
+    background-color: #28a745;
+}
+
+/* Modalità scura */
+.navbar-dark .navbar-brand {
+    color: #fff;
+}
+
+.navbar-dark .form-control {
+    border: 2px solid #6c757d;
+    background-color: #343a40;
+    color: #fff;
+}
+
+.navbar-dark .form-control:focus {
+    border-color: #007bff;
+}
+
+.btn-light-mode {
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.btn-light-mode:hover {
+    background-color: #e2e6ea;
+    color: #000;
+}

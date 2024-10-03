@@ -1,0 +1,91 @@
+main {
+    padding: 2rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Stile per le righe delle card */
+.gy-3 {
+    row-gap: 1.5rem;
+}
+
+/* Stile per le card */
+.card {
+    height: 100%;
+    transition: box-shadow 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card .card-body {
+    padding: 1rem;
+}
+
+/* Stile per mantenere 3 card per riga */
+@media (min-width: 992px) {
+    .col-lg-4 {
+        flex: 0 0 33.3333%;
+        max-width: 33.3333%;
+    }
+}
+
+/* Stile per i commenti */
+.comments-column {
+    max-height: 500px; /* Limita l'altezza per evitare che spinga gli elementi verso il basso */
+    overflow-y: auto;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.bg-dark .comments-column {
+    background-color: #495057;
+    color: #f8f9fa;
+}
+
+.text-light .comments-column {
+    color: #f8f9fa;
+}
+
+/* Adattamenti per la modalità scura e chiara */
+.bg-dark {
+    background-color: #343a40 !important;
+}
+
+.text-light {
+    color: #f8f9fa !important;
+}
+
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+.text-dark {
+    color: #343a40 !important;
+}
+
+/* Assicurati che la sezione dei commenti non occupi troppo spazio */
+@media (max-width: 768px) {
+    .comments-column {
+        margin-top: 1.5rem;
+    }
+
+    /* Per dispositivi più piccoli, le card passano a 2 per riga */
+    .col-sm-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Per dispositivi molto piccoli, 1 card per riga */
+    .col-sm-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}

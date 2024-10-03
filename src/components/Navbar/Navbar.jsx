@@ -7,6 +7,7 @@ import { useContext } from 'react'
 import { BookContext } from '../contexts/BookContext'
 import { ThemeContext } from '../contexts/ThemeContext'
 import { Link } from 'react-router-dom'
+import '../Navbar/Navbar.css'
 
 const NavbarCustom = () => {
     const { inputValue, handleInputChange, handleSubmitForm } =
@@ -18,7 +19,7 @@ const NavbarCustom = () => {
         <Navbar
             bg={isDarkMode ? 'dark' : 'light'}
             data-bs-theme={isDarkMode ? 'dark' : 'light'}
-            className="d-flex justify-content-between"
+            className="d-flex justify-content-between sticky-top"
         >
             <Container>
                 <Button

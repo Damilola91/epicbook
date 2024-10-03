@@ -5,6 +5,7 @@ import { BookContext } from '../contexts/BookContext'
 import { ThemeContext } from '../contexts/ThemeContext'
 import { CommentSelectedCard } from '../contexts/CommentSelectedCard'
 import AllComments from '../AllCommets/AllComments'
+import '../MainSection/MainSection.css'
 
 const MainSection = () => {
     const { books } = useContext(BookContext)
