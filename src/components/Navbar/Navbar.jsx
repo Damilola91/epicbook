@@ -17,6 +17,7 @@ const NavbarCustom = () => {
 
     return (
         <Navbar
+            data-testid="nav"
             bg={isDarkMode ? 'dark' : 'light'}
             data-bs-theme={isDarkMode ? 'dark' : 'light'}
             className="d-flex justify-content-between sticky-top"
@@ -26,6 +27,7 @@ const NavbarCustom = () => {
                     variant="info"
                     className="me-2"
                     onClick={toggleThemeMode}
+                    role="button"
                 >
                     {isDarkMode ? 'Light Mode' : 'Dark Mode'}
                 </Button>

@@ -1,7 +1,7 @@
 import { Button, Col } from 'react-bootstrap'
 import Card from 'react-bootstrap/Card'
 import './BookCard.css'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { ThemeContext } from '../contexts/ThemeContext'
 import { CommentSelectedCard } from '../contexts/CommentSelectedCard'
 import { useNavigate } from 'react-router-dom'
@@ -27,11 +27,12 @@ const BookCard = ({ price, category, title, img, asin }) => {
                     variant="top"
                     className="h-75 w-100 object-fit-cover custom-img"
                     src={img}
+                    role="img"
+                    alt="imagine"
                 />
                 <Card.Body
-                    className={` custom-body ${
-                        isDarkMode ? 'bg-dark text-light' : 'bg-light text-dark'
-                    }`}
+                    className={`custom-body ${isDarkMode ? 'bg-dark text-light' : 'bg-light text-dark'}`}
+                    data-testid="book-card"
                 >
                     <Card.Title className="custom-title">{category}</Card.Title>
                     <Card.Text className="text-truncate custom-text">

@@ -19,7 +19,7 @@
 /* Stile per i link della navbar */
 .nav-link {
     font-size: 1rem;
-    color: lightcyan;
+    color: black;
     transition: color 0.3s ease-in-out;
     margin-right: 10px;
 }

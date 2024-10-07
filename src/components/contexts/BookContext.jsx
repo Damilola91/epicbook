@@ -9,17 +9,17 @@ export const BookContext = createContext()
 
 export const BookContextProvider = ({ children }) => {
     const allBooks = [...fantasy, ...history, ...romance, ...horror, ...scifi]
-    const [books, setBooks] = useState(fantasy) // Gestione iniziale dei libri fantasy
+    const [books, setBooks] = useState(fantasy)
     const [inputValue, setInputValue] = useState('')
 
     const filteredBook = () => {
         if (inputValue === '') {
-            setBooks(allBooks) // Ripristina tutti i libri
+            setBooks(allBooks)
         } else {
             const filteredBooks = allBooks.filter((book) =>
                 book.title.toLowerCase().includes(inputValue.toLowerCase())
             )
-            setBooks(filteredBooks) // Filtra i libri
+            setBooks(filteredBooks)
         }
     }
 

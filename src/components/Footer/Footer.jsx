@@ -9,20 +9,23 @@ const Footer = () => {
     return (
         <footer
             className={`text-center py-3 ${isDarkMode ? 'bg-dark text-light' : 'bg-light text-dark'}`}
+            data-testid="footer"
         >
             <Container>
                 <Row>
                     <Col>
                         <div className="d-flex flex-column gap-2 justify-content-center align-items-center">
                             <div>
-                                <h2>Book Store</h2>
+                                <h2 data-testid="footer-title">Book Store</h2>
                             </div>
 
                             <div className="d-flex gap-3">
-                                {navLinks.map((link) => (
+                                {navLinks.map((link, index) => (
                                     <a
                                         className={`text-decoration-none ${isDarkMode ? 'text-white' : 'text-dark'}`}
                                         href={link.href}
+                                        key={index}
+                                        data-testid={`nav-link-${index}`}
                                     >
                                         {link.text}
                                     </a>
@@ -32,23 +35,26 @@ const Footer = () => {
                             <div className="d-flex gap-3 align-items-center justify-content-center">
                                 <LogoTwitter
                                     color={isDarkMode ? 'white' : 'dark'}
-                                    title="A"
+                                    title="Twitter"
                                     height="40px"
                                     width="40px"
+                                    data-testid="twitter-icon"
                                 />
 
                                 <LogoTiktok
                                     color={isDarkMode ? 'white' : 'dark'}
-                                    title="B"
+                                    title="Tiktok"
                                     height="40px"
                                     width="40px"
+                                    data-testid="tiktok-icon"
                                 />
 
                                 <LogoInstagram
                                     color={isDarkMode ? 'white' : 'dark'}
-                                    title="C"
+                                    title="Instagram"
                                     height="40px"
                                     width="40px"
+                                    data-testid="instagram-icon"
                                 />
                             </div>
                         </div>
