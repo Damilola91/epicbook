@@ -4,14 +4,17 @@ import './WelcomeSection.css'
 import { ThemeContext } from '../contexts/ThemeContext'
 
 const WelcomeSection = ({ sweetAlert }) => {
-    const { books } = useContext(BookContext)
+    const { allBooks: books } = useContext(BookContext)
     const { isDarkMode } = useContext(ThemeContext)
     const [randomBook, setRandomBook] = useState(null)
 
     useEffect(() => {
-        const randomIndex = Math.floor(Math.random() * books.length)
-        setRandomBook(books[randomIndex])
+        const randomIndex = Math.floor(Math.random() * books.books.length)
+        console.log(randomIndex)
+        setRandomBook(books.books[randomIndex])
     }, [])
+
+    console.log(randomBook)
 
     return (
         <div
@@ -46,7 +49,7 @@ const WelcomeSection = ({ sweetAlert }) => {
                                 onClick={sweetAlert}
                                 className="btn btn-info text-white"
                             >
-                                Acquista a: {randomBook?.price}£
+                                Acquista a: {randomBook?.price.$numberDecimal}£
                             </button>
 
                             <button className="btn btn-warning text-white">

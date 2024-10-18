@@ -1,23 +1,25 @@
 import Footer from '../../components/Footer/Footer'
 import NavbarCustom from '../../components/Navbar/Navbar'
 import { Col, Container, Row, Card } from 'react-bootstrap'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
 import { BookContext } from '../../components/contexts/BookContext'
 import { APIKEY } from '../../constants'
 import { ThemeContext } from '../../components/contexts/ThemeContext'
+import { CommentSelectedCard } from '../../components/contexts/CommentSelectedCard' // Importa il contesto per i commenti
+import AllComments from '../../components/AllCommets/AllComments' // Importa il componente AllComments
 import '../BookDetails/BookDetails.css'
 
 const BookDetails = () => {
-    const { bookId } = useParams()
-    const { books } = useContext(BookContext)
-    const selectedBook = books.find((book) => book.asin === bookId)
-    const [comments, setComments] = useState([])
+    const { bookId } = useParams() // Prendi l'id del libro dai parametri dell'URL
+    const { allBooks: books } = useContext(BookContext)
+    const selectedBook = books?.books?.find((book) => book.asin === bookId)
+
     const { isDarkMode } = useContext(ThemeContext)
-    const [query, setQuery] = useSearchParams()
-    console.log(query)
-    const params = Object.fromEntries([...query]) //crea un oggetto da ciò che trova in quell'array
-    console.log(params)
+    const { selectedCardAsin, setSelectedCardAsin } =
+        useContext(CommentSelectedCard) // Usa il contesto per la selezione del libro
+
+    const [comments, setComments] = useState([])
 
     const ENDPOINTGET = `https://striveschool-api.herokuapp.com/api/books/${bookId}/comments/`
 
@@ -40,21 +42,23 @@ const BookDetails = () => {
         }
     }
 
+    // Usa l'effetto per ottenere i commenti del libro selezionato e impostare il selectedCardAsin
     useEffect(() => {
         getRatings()
-    }, [bookId])
+        setSelectedCardAsin(bookId) // Imposta l'asin del libro selezionato
+    }, [bookId, setSelectedCardAsin])
 
     return (
         <>
             <NavbarCustom />
             <Container
                 fluid
-                className={`book-details-container  ${isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark'}`}
+                className={`book-details-container ${isDarkMode ? 'bg-dark text-white' : 'bg-light text-dark'}`}
             >
                 <Row className="justify-content-center">
                     {selectedBook ? (
                         <>
-                            <Col sm={12} md={6} lg={5}>
+                            <Col sm={6} md={6} lg={5}>
                                 <Card className="book-card shadow-sm">
                                     <Card.Img
                                         variant="top"
@@ -71,7 +75,7 @@ const BookDetails = () => {
                                         </Card.Text>
                                         <Card.Text>
                                             <strong>Price:</strong>{' '}
-                                            {selectedBook.price}£
+                                            {selectedBook.price.$numberDecimal}£
                                         </Card.Text>
                                         <Card.Text>
                                             {selectedBook.description}
@@ -86,17 +90,10 @@ const BookDetails = () => {
                                             Comments
                                         </h5>
                                         <div className="comments-section">
-                                            {comments.length > 0 ? (
-                                                comments.map((comment) => (
-                                                    <p
-                                                        key={comment._id}
-                                                        className="comment"
-                                                    >
-                                                        {comment.comment} -{' '}
-                                                        <strong>Rating:</strong>{' '}
-                                                        {comment.rate}
-                                                    </p>
-                                                ))
+                                            {selectedCardAsin ? (
+                                                <AllComments
+                                                    asin={selectedCardAsin}
+                                                />
                                             ) : (
                                                 <p className="no-comments">
                                                     No comments available

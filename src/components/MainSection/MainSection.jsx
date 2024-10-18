@@ -1,21 +1,16 @@
 import { Col, Container, Row } from 'react-bootstrap'
 import BookCard from '../BookCard/BookCard'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { BookContext } from '../contexts/BookContext'
 import { ThemeContext } from '../contexts/ThemeContext'
-import { CommentSelectedCard } from '../contexts/CommentSelectedCard'
-import AllComments from '../AllCommets/AllComments'
 import '../MainSection/MainSection.css'
+import ResponsivePagination from 'react-responsive-pagination'
+import 'react-responsive-pagination/themes/classic.css'
 
 const MainSection = () => {
-    const { books } = useContext(BookContext)
+    const { allBooks: books, page, pageSize, setPage } = useContext(BookContext)
     const { isDarkMode } = useContext(ThemeContext)
-    const { selectedCardAsin, setSelectedCardAsin, toggleIsSelect } =
-        useContext(CommentSelectedCard)
-
-    useEffect(() => {
-        setSelectedCardAsin(null)
-    }, [])
+    console.log(books)
 
     return (
         <main
@@ -23,34 +18,29 @@ const MainSection = () => {
         >
             <Container fluid>
                 <Row className="gy-3">
-                    <Col sm={6} md={6}>
-                        <Row className="gy-3">
-                            {books &&
-                                books
-                                    .slice(0, 20)
-                                    .map((book) => (
-                                        <BookCard
-                                            key={book.asin}
-                                            title={book.title}
-                                            price={book.price}
-                                            category={book.category}
-                                            img={book.img}
-                                            asin={book.asin}
-                                        />
-                                    ))}
-                        </Row>
-                    </Col>
-
-                    <Col sm={6} md={6}>
-                        <h3>
-                            <strong>Comments</strong>
-                        </h3>
-
-                        {selectedCardAsin && (
-                            <AllComments asin={selectedCardAsin} />
-                        )}
-                    </Col>
+                    {books &&
+                        books.books.map((book) => (
+                            <BookCard
+                                key={book.asin}
+                                title={book.title}
+                                price={book.price.$numberDecimal}
+                                category={book.category}
+                                img={book.img}
+                                asin={book.asin}
+                            />
+                        ))}
                 </Row>
+                {books && (
+                    <Row className="mt-4">
+                        <Col>
+                            <ResponsivePagination
+                                current={page}
+                                total={books.totalPages}
+                                onPageChange={setPage}
+                            />
+                        </Col>
+                    </Row>
+                )}
             </Container>
         </main>
     )
