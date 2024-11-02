@@ -3,14 +3,14 @@ import { createContext, useState } from 'react'
 export const CommentSelectedCard = createContext()
 
 export const CommentSelectedCardProvider = ({ children }) => {
-    const [selectedCardAsin, setSelectedCardAsin] = useState(null)
-    const toggleIsSelect = (asin) => {
-        setSelectedCardAsin((prevAsin) => (prevAsin === asin ? null : asin))
+    const [selectedCardId, setSelectedCardId] = useState(null)
+    const toggleIsSelect = (_id) => {
+        setSelectedCardId((prevId) => (prevId === _id ? null : _id))
     }
 
     return (
         <CommentSelectedCard.Provider
-            value={{ selectedCardAsin, toggleIsSelect, setSelectedCardAsin }}
+            value={{ selectedCardId, toggleIsSelect, setSelectedCardId }}
         >
             {children}
         </CommentSelectedCard.Provider>

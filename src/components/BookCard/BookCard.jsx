@@ -6,22 +6,23 @@ import { ThemeContext } from '../contexts/ThemeContext'
 import { CommentSelectedCard } from '../contexts/CommentSelectedCard'
 import { useNavigate } from 'react-router-dom'
 
-const BookCard = ({ price, category, title, img, asin }) => {
+const BookCard = ({ price, category, title, img, asin, _id }) => {
     const { selectedCardAsin, toggleIsSelect } = useContext(CommentSelectedCard)
     const { isDarkMode } = useContext(ThemeContext)
     const navigate = useNavigate()
+
     const handleRedirectDetails = () => {
-        navigate(`/book/${asin}?title=${title}&test=true`)
+        navigate(`/book/${_id}?title=${title}&test=true`)
     }
 
-    const isSelected = selectedCardAsin === asin
+    const isSelected = selectedCardAsin === _id
     const selectedCardStyle = isSelected ? 'border-5 border-danger' : ''
 
     return (
         <Col sm={12} md={6} lg={2}>
             <Card
                 className={`h-100 custom ${isDarkMode ? 'border-3 white' : ''} ${selectedCardStyle}`}
-                onClick={() => toggleIsSelect(asin)}
+                onClick={() => toggleIsSelect(_id)}
             >
                 <Card.Img
                     variant="top"

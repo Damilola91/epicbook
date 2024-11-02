@@ -1,0 +1,75 @@
+/* Container principale per il form */
+.container {
+    max-width: 600px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Titolo del form */
+h2 {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+/* Spaziatura e stile dei gruppi del form */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Stile per gli input */
+.form-control {
+    font-size: 1em;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+/* Stile per la dropdown dei generi */
+.form-select {
+    font-size: 1em;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+/* Stile per il bottone di submit */
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover e focus per il bottone */
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+button[type="submit"]:focus {
+    background-color: #004085;
+    outline: none;
+}
+
+/* Per migliorare la spaziatura e la disposizione degli elementi nei dispositivi mobili */
+@media (max-width: 576px) {
+    .container {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    button[type="submit"] {
+        font-size: 1em;
+        padding: 0.5rem;
+    }
+}

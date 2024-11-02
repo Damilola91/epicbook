@@ -1,19 +1,19 @@
 import { Button, ListGroup, Form } from 'react-bootstrap'
-import { APIKEY } from '../../constants'
 import { useContext, useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import { ThemeContext } from '../contexts/ThemeContext'
 
-const AllComments = ({ asin }) => {
+const AllComments = ({ _id, userId }) => {
     const { isDarkMode } = useContext(ThemeContext)
 
-    const ENDPOINTGET = `https://striveschool-api.herokuapp.com/api/books/${asin}/comments/`
+    const ENDPOINTGET = `${import.meta.env.VITE_SERVER_BASE_URL}/comments/book/${_id}`
     const [comments, setComments] = useState([])
     const [modalFormState, setModalFormState] = useState({
         rate: '',
         comment: '',
-        id: null, // per tenere traccia dell'ID del commento da modificare
-        elementId: asin,
+        id: null,
+        book: _id,
+        user: '672260374f0345f3a15581d9',
     })
 
     const handleInputChange = (e) => {
@@ -26,16 +26,12 @@ const AllComments = ({ asin }) => {
     }
 
     const getRatings = async () => {
-        if (!asin) return
+        if (!_id) return
         try {
-            const response = await fetch(ENDPOINTGET, {
-                headers: {
-                    Authorization: `Bearer ${APIKEY}`,
-                },
-            })
+            const response = await fetch(ENDPOINTGET)
             if (response.ok) {
                 const result = await response.json()
-                setComments(result)
+                setComments(result.comments)
             } else {
                 console.log('Error fetching comments:', response.status)
             }
@@ -46,15 +42,16 @@ const AllComments = ({ asin }) => {
 
     useEffect(() => {
         getRatings()
-    }, [asin])
+    }, [_id])
 
     const addOrUpdateComment = async (e) => {
         e.preventDefault()
-        const endpoint = modalFormState.id
-            ? `https://striveschool-api.herokuapp.com/api/comments/${modalFormState.id}`
-            : 'https://striveschool-api.herokuapp.com/api/comments/'
 
-        const method = modalFormState.id ? 'PUT' : 'POST'
+        const endpoint = modalFormState.id
+            ? `${import.meta.env.VITE_SERVER_BASE_URL}/comments/update/${modalFormState.id}`
+            : `${import.meta.env.VITE_SERVER_BASE_URL}/comments/create`
+
+        const method = modalFormState.id ? 'PATCH' : 'POST'
 
         const result = await Swal.fire({
             title: modalFormState.id
@@ -68,13 +65,24 @@ const AllComments = ({ asin }) => {
 
         if (result.isConfirmed) {
             try {
+                console.log('Payload inviato:', {
+                    rate: modalFormState.rate,
+                    comment: modalFormState.comment,
+                    book: modalFormState.book,
+                    user: modalFormState.user,
+                })
+
                 const response = await fetch(endpoint, {
                     method,
                     headers: {
-                        Authorization: `Bearer ${APIKEY}`,
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(modalFormState),
+                    body: JSON.stringify({
+                        rate: modalFormState.rate,
+                        comment: modalFormState.comment,
+                        book: modalFormState.book,
+                        user: modalFormState.user,
+                    }),
                 })
 
                 if (response.ok) {
@@ -83,14 +91,15 @@ const AllComments = ({ asin }) => {
                         rate: '',
                         comment: '',
                         id: null,
-                        elementId: asin,
+                        book: _id,
+                        user: userId,
                     })
-                    getRatings() // Ricarica i commenti aggiornati
+                    getRatings()
                 } else {
                     Swal.fire('Error!', 'Something went wrong.', 'error')
                 }
             } catch (error) {
-                console.error(error)
+                console.error('Errore durante il fetch:', error)
                 Swal.fire('Error!', 'Something went wrong.', 'error')
             }
         } else if (result.isDenied) {
@@ -102,13 +111,14 @@ const AllComments = ({ asin }) => {
         setModalFormState({
             rate: comment.rate,
             comment: comment.comment,
-            id: comment._id, // Salva l'ID per l'update
-            elementId: asin,
+            id: comment._id,
+            book: comment.book,
+            user: comment.user,
         })
     }
 
     const deleteComment = async (commentId) => {
-        const endpoint = `https://striveschool-api.herokuapp.com/api/comments/${commentId}`
+        const endpoint = `${import.meta.env.VITE_SERVER_BASE_URL}/comments/delete/${commentId}`
 
         const result = await Swal.fire({
             title: 'Do you want to delete this comment?',
@@ -122,9 +132,6 @@ const AllComments = ({ asin }) => {
             try {
                 const response = await fetch(endpoint, {
                     method: 'DELETE',
-                    headers: {
-                        Authorization: `Bearer ${APIKEY}`,
-                    },
                 })
 
                 if (response.ok) {
@@ -150,7 +157,7 @@ const AllComments = ({ asin }) => {
                         <ListGroup.Item key={comment._id}>
                             <div className="d-flex flex-column gap-1">
                                 <div>
-                                    <strong>Author:</strong> {comment.author}
+                                    <strong>Author:</strong> {comment.user.name}
                                 </div>
                                 <div>
                                     <strong>Comment:</strong> {comment.comment}

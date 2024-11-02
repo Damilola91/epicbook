@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom' // Importa useNavigate
+import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import './Login.css'
 
-const Login = ({ onLogin }) => {
+const Login = () => {
     const [formData, setFormData] = useState({})
     const navigate = useNavigate()
 
@@ -26,11 +28,14 @@ const Login = ({ onLogin }) => {
                     body: JSON.stringify(formData),
                 }
             )
-            const result = await response.json()
+
             if (response.ok) {
-                alert('Login effettuato con successo!')
-                onLogin() // Cambia lo stato di autenticazione
-                navigate('/') // Naviga alla homepage
+                const result = await response.json()
+                localStorage.setItem('Authorized', JSON.stringify(result))
+
+                Swal.fire('Welcome To EpicBook')
+
+                navigate('/home') // Naviga alla homepage
             } else {
                 alert(`Errore: ${result.message}`)
             }
@@ -41,23 +46,28 @@ const Login = ({ onLogin }) => {
     }
 
     return (
-        <>
-            <form onSubmit={onSubmit}>
+        <div className="login-container">
+            <h1 className="login-title">EpicBook</h1>
+            <form onSubmit={onSubmit} className="login-form">
                 <input
+                    className="login-input"
                     onChange={handleInput}
-                    placeholder="email"
+                    placeholder="Email"
                     name="email"
                     type="email"
                 />
                 <input
+                    className="login-input"
                     onChange={handleInput}
-                    placeholder="password"
+                    placeholder="Password"
                     name="password"
                     type="password"
                 />
-                <button type="submit">Invia</button>
+                <button type="submit" className="login-button">
+                    Invia
+                </button>
             </form>
-        </>
+        </div>
     )
 }
 

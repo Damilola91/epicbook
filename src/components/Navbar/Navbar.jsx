@@ -33,7 +33,7 @@ const NavbarCustom = () => {
                 </Button>
                 <Navbar.Brand>
                     <Link
-                        to="/"
+                        to="/home"
                         style={{ textDecoration: 'none', color: 'inherit' }}
                     >
                         EpicBook

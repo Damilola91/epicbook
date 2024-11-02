@@ -14,8 +14,6 @@ const WelcomeSection = ({ sweetAlert }) => {
         setRandomBook(books.books[randomIndex])
     }, [])
 
-    console.log(randomBook)
-
     return (
         <div
             className={` text-center py-5 ${isDarkMode ? 'bg-dark' : 'bg-light'}`}

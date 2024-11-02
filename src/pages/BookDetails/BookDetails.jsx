@@ -6,22 +6,22 @@ import { useContext, useEffect, useState } from 'react'
 import { BookContext } from '../../components/contexts/BookContext'
 import { APIKEY } from '../../constants'
 import { ThemeContext } from '../../components/contexts/ThemeContext'
-import { CommentSelectedCard } from '../../components/contexts/CommentSelectedCard' // Importa il contesto per i commenti
-import AllComments from '../../components/AllCommets/AllComments' // Importa il componente AllComments
+import { CommentSelectedCard } from '../../components/contexts/CommentSelectedCard'
+import AllComments from '../../components/AllCommets/AllComments'
 import '../BookDetails/BookDetails.css'
 
 const BookDetails = () => {
-    const { bookId } = useParams() // Prendi l'id del libro dai parametri dell'URL
+    const { bookId } = useParams()
     const { allBooks: books } = useContext(BookContext)
-    const selectedBook = books?.books?.find((book) => book.asin === bookId)
+    const selectedBook = books?.books?.find((book) => book._id === bookId)
 
     const { isDarkMode } = useContext(ThemeContext)
-    const { selectedCardAsin, setSelectedCardAsin } =
-        useContext(CommentSelectedCard) // Usa il contesto per la selezione del libro
+    const { selectedCardId, setSelectedCardId } =
+        useContext(CommentSelectedCard)
 
     const [comments, setComments] = useState([])
 
-    const ENDPOINTGET = `https://striveschool-api.herokuapp.com/api/books/${bookId}/comments/`
+    const ENDPOINTGET = `${import.meta.env.VITE_SERVER_BASE_URL}comments/book/${bookId}`
 
     const getRatings = async () => {
         if (!bookId) return
@@ -42,11 +42,10 @@ const BookDetails = () => {
         }
     }
 
-    // Usa l'effetto per ottenere i commenti del libro selezionato e impostare il selectedCardAsin
     useEffect(() => {
         getRatings()
-        setSelectedCardAsin(bookId) // Imposta l'asin del libro selezionato
-    }, [bookId, setSelectedCardAsin])
+        setSelectedCardId(bookId)
+    }, [bookId, setSelectedCardId])
 
     return (
         <>
@@ -90,9 +89,10 @@ const BookDetails = () => {
                                             Comments
                                         </h5>
                                         <div className="comments-section">
-                                            {selectedCardAsin ? (
+                                            {selectedCardId ? (
                                                 <AllComments
-                                                    asin={selectedCardAsin}
+                                                    _id={selectedCardId}
+                                                    userId={selectedCardId}
                                                 />
                                             ) : (
                                                 <p className="no-comments">

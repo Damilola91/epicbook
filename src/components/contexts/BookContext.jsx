@@ -3,31 +3,40 @@ import { createContext, useEffect, useState } from 'react'
 export const BookContext = createContext()
 
 export const BookContextProvider = ({ children }) => {
-    const [allBooks, setBooks] = useState()
+    const [allBooks, setBooks] = useState([])
     const [page, setPage] = useState(1)
-    const [pageSize, setpageSize] = useState(10)
+    const [pageSize, setPageSize] = useState(10)
     const [inputValue, setInputValue] = useState('')
 
-    const getBooks = async () => {
+    const getAllBooks = async (page, pageSize) => {
         try {
-            const response = await fetch(
-                `${import.meta.env.VITE_SERVER_BASE_URL}/books?page=${page}&pageSize=${pageSize}`
-            )
+            const url = `${import.meta.env.VITE_SERVER_BASE_URL}/books?page=${page}&pageSize=${pageSize}`
+            const response = await fetch(url)
             const result = await response.json()
-            setBooks(result)
+
+            if (response.ok) {
+                setBooks(result)
+            } else {
+                console.error(result.message)
+            }
         } catch (error) {
             console.error(error.message)
         }
     }
 
-    const filteredBook = () => {
-        if (inputValue === '') {
-            setBooks(allBooks)
-        } else {
-            const filteredBooks = allBooks.filter((book) =>
-                book.title.toLowerCase().includes(inputValue.toLowerCase())
-            )
-            setBooks(filteredBooks)
+    const searchBooksByTitle = async (inputValue, page, pageSize) => {
+        try {
+            const url = `${import.meta.env.VITE_SERVER_BASE_URL}/books/search/${inputValue}?page=${page}&pageSize=${pageSize}`
+            const response = await fetch(url)
+            const result = await response.json()
+
+            if (response.ok) {
+                setBooks({ books: result.books, totalPages: result.totalPages })
+            } else {
+                console.error(result.message)
+            }
+        } catch (error) {
+            console.error(error.message)
         }
     }
 
@@ -37,12 +46,18 @@ export const BookContextProvider = ({ children }) => {
 
     const handleSubmitForm = (e) => {
         e.preventDefault()
-        filteredBook()
+        if (inputValue.trim().toLowerCase() !== '') {
+            searchBooksByTitle(inputValue, page, pageSize)
+        } else {
+            getAllBooks(page, pageSize)
+        }
     }
 
     useEffect(() => {
-        getBooks()
-    }, [page, pageSize])
+        if (inputValue.trim().toLowerCase() === '') {
+            getAllBooks(page, pageSize)
+        }
+    }, [page, pageSize, inputValue])
 
     return (
         <BookContext.Provider
@@ -54,7 +69,7 @@ export const BookContextProvider = ({ children }) => {
                 page,
                 setPage,
                 pageSize,
-                setpageSize,
+                setPageSize,
             }}
         >
             {children}
