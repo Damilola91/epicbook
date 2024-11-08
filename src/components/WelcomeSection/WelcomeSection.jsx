@@ -9,16 +9,17 @@ const WelcomeSection = ({ sweetAlert }) => {
     const [randomBook, setRandomBook] = useState(null)
 
     useEffect(() => {
-        const randomIndex = Math.floor(Math.random() * books.books.length)
-        console.log(randomIndex)
-        setRandomBook(books.books[randomIndex])
-    }, [])
+        if (books?.books && books.books.length > 0) {
+            const randomIndex = Math.floor(Math.random() * books.books.length)
+            setRandomBook(books.books[randomIndex])
+        }
+    }, [books]) // Aggiungi books come dipendenza
 
     return (
         <div
-            className={` text-center py-5 ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
+            className={`text-center py-5 ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
         >
-            <div className="container  pt-5 pb-5">
+            <div className="container pt-5 pb-5">
                 <div className="row pt-5 pb-5">
                     <div className="col-lg-12 col-xl-12 ms-auto pb-5 pt-5">
                         <span

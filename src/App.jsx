@@ -6,23 +6,25 @@ import About from './pages/About/About'
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
 import BookOfTheDay from './pages/BookOfTheDay/BookOfTheDay'
 import BookDetails from './pages/BookDetails/BookDetails'
-import { ProtectedRoutes } from './middlewares/ProtectedRoutes'
+import ProtectedRoutes from './middlewares/ProtectedRoutes'
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
-import HomeNavigation from './pages/HomeNavigation/HomeNavigation'
+import SuccessLoginPage from './pages/SuccessLoginGoogle/SuccessLoginGoogle'
+import WrappedOrderForm from './components/WrapperOrderForm/WrapperOrderForm'
 
 const App = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route exact path="/" element={<HomeNavigation />} />
+                <Route exact path="/" element={<HomePage />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />{' '}
+                <Route path="/register" element={<Register />} />
+                <Route path="/success" element={<SuccessLoginPage />} />
                 <Route element={<ProtectedRoutes />}>
-                    <Route path="/home" element={<HomePage />} />
                     <Route path="/bookDay" element={<BookOfTheDay />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/book/:bookId" element={<BookDetails />} />
+                    <Route path="/order" element={<WrappedOrderForm />} />
                 </Route>
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>

@@ -2,9 +2,11 @@ import { Button, ListGroup, Form } from 'react-bootstrap'
 import { useContext, useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import { ThemeContext } from '../contexts/ThemeContext'
+import useSession from '../../hooks/useSession'
 
-const AllComments = ({ _id, userId }) => {
+const AllComments = ({ _id }) => {
     const { isDarkMode } = useContext(ThemeContext)
+    const userSession = useSession()
 
     const ENDPOINTGET = `${import.meta.env.VITE_SERVER_BASE_URL}/comments/book/${_id}`
     const [comments, setComments] = useState([])
@@ -13,7 +15,7 @@ const AllComments = ({ _id, userId }) => {
         comment: '',
         id: null,
         book: _id,
-        user: '672260374f0345f3a15581d9',
+        user: userSession._id,
     })
 
     const handleInputChange = (e) => {
@@ -92,7 +94,7 @@ const AllComments = ({ _id, userId }) => {
                         comment: '',
                         id: null,
                         book: _id,
-                        user: userId,
+                        user: userSession._id,
                     })
                     getRatings()
                 } else {
@@ -157,7 +159,10 @@ const AllComments = ({ _id, userId }) => {
                         <ListGroup.Item key={comment._id}>
                             <div className="d-flex flex-column gap-1">
                                 <div>
-                                    <strong>Author:</strong> {comment.user.name}
+                                    <strong>Author:</strong>{' '}
+                                    {comment.user
+                                        ? comment.user.name
+                                        : 'Not Available'}
                                 </div>
                                 <div>
                                     <strong>Comment:</strong> {comment.comment}

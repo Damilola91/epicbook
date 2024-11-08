@@ -4,15 +4,21 @@ import './BookCard.css'
 import { useContext } from 'react'
 import { ThemeContext } from '../contexts/ThemeContext'
 import { CommentSelectedCard } from '../contexts/CommentSelectedCard'
+import { CartContext } from '../contexts/CartContext'
 import { useNavigate } from 'react-router-dom'
 
 const BookCard = ({ price, category, title, img, asin, _id }) => {
     const { selectedCardAsin, toggleIsSelect } = useContext(CommentSelectedCard)
     const { isDarkMode } = useContext(ThemeContext)
+    const { addToCart } = useContext(CartContext)
     const navigate = useNavigate()
 
     const handleRedirectDetails = () => {
         navigate(`/book/${_id}?title=${title}&test=true`)
+    }
+
+    const handleAddToCart = () => {
+        addToCart({ price, category, title, img, asin, _id })
     }
 
     const isSelected = selectedCardAsin === _id
@@ -46,6 +52,8 @@ const BookCard = ({ price, category, title, img, asin, _id }) => {
                     >
                         Details
                     </Button>
+                    <Button onClick={handleAddToCart}>Cart</Button>{' '}
+                    {/* Modifica il click handler */}
                 </Card.Body>
             </Card>
         </Col>

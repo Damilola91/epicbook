@@ -1,6 +1,6 @@
 import { Form } from 'react-bootstrap'
 
-const AccountInfo = ({ formData, handleChange }) => {
+const AccountInfo = ({ formData, handleChange, errors }) => {
     return (
         <>
             <Form.Group controlId="email" className="mb-3">
@@ -11,7 +11,13 @@ const AccountInfo = ({ formData, handleChange }) => {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    isInvalid={errors.email}
                 />
+                {errors.email && (
+                    <Form.Control.Feedback type="invalid">
+                        L'email è obbligatoria e deve essere valida.
+                    </Form.Control.Feedback>
+                )}
             </Form.Group>
 
             <Form.Group controlId="password" className="mb-3">
@@ -23,7 +29,14 @@ const AccountInfo = ({ formData, handleChange }) => {
                     onChange={handleChange}
                     required
                     minLength="8"
+                    isInvalid={errors.password}
                 />
+                {errors.password && (
+                    <Form.Control.Feedback type="invalid">
+                        La password è obbligatoria e deve contenere almeno 8
+                        caratteri.
+                    </Form.Control.Feedback>
+                )}
             </Form.Group>
 
             <Form.Group controlId="username" className="mb-3">
@@ -35,7 +48,14 @@ const AccountInfo = ({ formData, handleChange }) => {
                     onChange={handleChange}
                     required
                     minLength="8"
+                    isInvalid={errors.username}
                 />
+                {errors.username && (
+                    <Form.Control.Feedback type="invalid">
+                        L'username è obbligatorio e deve contenere almeno 8
+                        caratteri.
+                    </Form.Control.Feedback>
+                )}
             </Form.Group>
         </>
     )

@@ -31,11 +31,14 @@ const Login = () => {
 
             if (response.ok) {
                 const result = await response.json()
-                localStorage.setItem('Authorized', JSON.stringify(result))
+                localStorage.setItem(
+                    'Authorization',
+                    JSON.stringify(result.token)
+                )
 
                 Swal.fire('Welcome To EpicBook')
 
-                navigate('/home') // Naviga alla homepage
+                navigate('/') // Naviga alla homepage
             } else {
                 alert(`Errore: ${result.message}`)
             }
@@ -43,6 +46,10 @@ const Login = () => {
             console.error('Errore di login:', error)
             alert('Si è verificato un errore durante il login.')
         }
+    }
+
+    const redirectToGoogle = () => {
+        window.location.href = `${import.meta.env.VITE_SERVER_BASE_URL}/auth/google`
     }
 
     return (
@@ -67,6 +74,10 @@ const Login = () => {
                     Invia
                 </button>
             </form>
+
+            <button onClick={redirectToGoogle} className="login-button">
+                Login with Google
+            </button>
         </div>
     )
 }

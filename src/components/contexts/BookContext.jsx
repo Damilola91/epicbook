@@ -6,8 +6,10 @@ export const BookContextProvider = ({ children }) => {
     const [allBooks, setBooks] = useState([])
     const [page, setPage] = useState(1)
     const [pageSize, setPageSize] = useState(10)
-    const [inputValue, setInputValue] = useState('')
 
+    const [inputValue, setInputValue] = useState('')
+    console.log(inputValue)
+    console.log('CONTEXT', page)
     const getAllBooks = async (page, pageSize) => {
         try {
             const url = `${import.meta.env.VITE_SERVER_BASE_URL}/books?page=${page}&pageSize=${pageSize}`
@@ -56,6 +58,8 @@ export const BookContextProvider = ({ children }) => {
     useEffect(() => {
         if (inputValue.trim().toLowerCase() === '') {
             getAllBooks(page, pageSize)
+        } else {
+            searchBooksByTitle(inputValue, page, pageSize)
         }
     }, [page, pageSize, inputValue])
 

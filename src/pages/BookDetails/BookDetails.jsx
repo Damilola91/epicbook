@@ -4,7 +4,6 @@ import { Col, Container, Row, Card } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
 import { BookContext } from '../../components/contexts/BookContext'
-import { APIKEY } from '../../constants'
 import { ThemeContext } from '../../components/contexts/ThemeContext'
 import { CommentSelectedCard } from '../../components/contexts/CommentSelectedCard'
 import AllComments from '../../components/AllCommets/AllComments'
@@ -21,16 +20,12 @@ const BookDetails = () => {
 
     const [comments, setComments] = useState([])
 
-    const ENDPOINTGET = `${import.meta.env.VITE_SERVER_BASE_URL}comments/book/${bookId}`
+    const ENDPOINTGET = `${import.meta.env.VITE_SERVER_BASE_URL}/comments/book/${bookId}`
 
     const getRatings = async () => {
         if (!bookId) return
         try {
-            const response = await fetch(ENDPOINTGET, {
-                headers: {
-                    Authorization: `Bearer ${APIKEY}`,
-                },
-            })
+            const response = await fetch(ENDPOINTGET)
             if (response.ok) {
                 const result = await response.json()
                 setComments(result)
@@ -92,7 +87,6 @@ const BookDetails = () => {
                                             {selectedCardId ? (
                                                 <AllComments
                                                     _id={selectedCardId}
-                                                    userId={selectedCardId}
                                                 />
                                             ) : (
                                                 <p className="no-comments">

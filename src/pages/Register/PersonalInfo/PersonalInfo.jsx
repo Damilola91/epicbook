@@ -1,7 +1,6 @@
-import React from 'react'
 import { Form } from 'react-bootstrap'
 
-const PersonalInfo = ({ formData, handleChange }) => {
+const PersonalInfo = ({ formData, handleChange, errors }) => {
     return (
         <>
             <Form.Group controlId="name" className="mb-3">
@@ -13,7 +12,14 @@ const PersonalInfo = ({ formData, handleChange }) => {
                     onChange={handleChange}
                     required
                     minLength="3"
+                    isInvalid={errors.name}
                 />
+                {errors.name && (
+                    <Form.Control.Feedback type="invalid">
+                        Il nome è obbligatorio e deve contenere almeno 3
+                        caratteri.
+                    </Form.Control.Feedback>
+                )}
             </Form.Group>
 
             <Form.Group controlId="surname" className="mb-3">
@@ -25,7 +31,14 @@ const PersonalInfo = ({ formData, handleChange }) => {
                     onChange={handleChange}
                     required
                     minLength="3"
+                    isInvalid={errors.surname}
                 />
+                {errors.surname && (
+                    <Form.Control.Feedback type="invalid">
+                        Il cognome è obbligatorio e deve contenere almeno 3
+                        caratteri.
+                    </Form.Control.Feedback>
+                )}
             </Form.Group>
 
             <Form.Group controlId="dob" className="mb-3">
@@ -36,7 +49,13 @@ const PersonalInfo = ({ formData, handleChange }) => {
                     value={formData.dob}
                     onChange={handleChange}
                     required
+                    isInvalid={errors.dob}
                 />
+                {errors.dob && (
+                    <Form.Control.Feedback type="invalid">
+                        La data di nascita è obbligatoria.
+                    </Form.Control.Feedback>
+                )}
             </Form.Group>
         </>
     )
