@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button, Col, Form, Row, Nav, Navbar, Container } from 'react-bootstrap'
 import { BookContext } from '../contexts/BookContext'
 import { ThemeContext } from '../contexts/ThemeContext'
-import { UilShoppingCart, UilSignInAlt } from '@iconscout/react-unicons' // Icone del carrello e login
+import { UilShoppingCart, UilSignInAlt } from '@iconscout/react-unicons'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { navLinks } from '../dataSource/navData'
@@ -26,7 +26,7 @@ const NavbarCustom = () => {
             <Navbar
                 data-testid="nav"
                 bg={isDarkMode ? 'dark' : 'light'}
-                data-bs-theme={isDarkMode ? 'dark' : 'light'}
+                expand="lg"
                 className="d-flex justify-content-between sticky-top"
             >
                 <Container>
@@ -46,56 +46,64 @@ const NavbarCustom = () => {
                             EpicBook
                         </Link>
                     </Navbar.Brand>
-                    <Nav className="me-auto">
-                        {navLinks.map((link) => (
-                            <Nav.Link as={Link} to={link.to} key={link.to}>
-                                {link.text}
+
+                    {/* Toggle per modalità mobile */}
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            {navLinks.map((link) => (
+                                <Nav.Link as={Link} to={link.to} key={link.to}>
+                                    {link.text}
+                                </Nav.Link>
+                            ))}
+
+                            <Nav.Link as={Link} to="/register" className="ms-3">
+                                Registrati
                             </Nav.Link>
-                        ))}
+                        </Nav>
 
-                        <Nav.Link as={Link} to="/register" className="ms-3">
-                            Registrati
-                        </Nav.Link>
-                    </Nav>
+                        <Form
+                            className="d-inline-flex"
+                            onSubmit={handleSubmitForm}
+                        >
+                            <Row>
+                                <Col xs="auto">
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Search Book"
+                                        value={inputValue}
+                                        onChange={handleInputChange}
+                                        className="mr-sm-2"
+                                    />
+                                </Col>
+                                <Col xs="auto">
+                                    <Button variant="success" type="submit">
+                                        Submit
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Form>
 
-                    <Form className="d-inline-flex" onSubmit={handleSubmitForm}>
-                        <Row>
-                            <Col xs="auto">
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Search Book"
-                                    value={inputValue}
-                                    onChange={handleInputChange}
-                                    className="mr-sm-2"
-                                />
-                            </Col>
-                            <Col xs="auto">
-                                <Button variant="success" type="submit">
-                                    Submit
-                                </Button>
-                            </Col>
-                        </Row>
-                    </Form>
+                        {/* Icona del carrello */}
+                        <Link to="/order" className="ms-3">
+                            <UilShoppingCart
+                                size={24}
+                                color={isDarkMode ? 'white' : 'black'}
+                            />
+                        </Link>
 
-                    {/* Icona del carrello */}
-                    <Link to="/order" className="ms-3">
-                        <UilShoppingCart
-                            size={24}
-                            color={isDarkMode ? 'white' : 'black'}
-                        />
-                    </Link>
-
-                    {/* Bottone per aprire il login nella sidebar con icona */}
-                    <Button
-                        variant="secondary"
-                        onClick={toggleDrawer}
-                        className="ms-3"
-                    >
-                        <UilSignInAlt
-                            size={24}
-                            color={isDarkMode ? 'white' : 'black'}
-                        />
-                    </Button>
+                        {/* Bottone per aprire il login nella sidebar con icona */}
+                        <Button
+                            variant="secondary"
+                            onClick={toggleDrawer}
+                            className="ms-3"
+                        >
+                            <UilSignInAlt
+                                size={24}
+                                color={isDarkMode ? 'white' : 'black'}
+                            />
+                        </Button>
+                    </Navbar.Collapse>
                 </Container>
             </Navbar>
 
@@ -103,7 +111,7 @@ const NavbarCustom = () => {
             <Drawer
                 open={isOpen}
                 onClose={toggleDrawer}
-                direction="left" // Drawer a destra
+                direction="left"
                 className="drawer"
                 style={{ zIndex: 9999 }}
                 size={350}
