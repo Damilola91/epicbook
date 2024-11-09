@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import './Login.css'
 
-const Login = () => {
+const Login = ({ closeDrawer }) => {
     const [formData, setFormData] = useState({ email: '', password: '' })
     const [isSubmitting, setIsSubmitting] = useState(false)
     const navigate = useNavigate()
@@ -19,7 +19,6 @@ const Login = () => {
     const onSubmit = async (event) => {
         event.preventDefault()
 
-        // Validazione lato client
         if (!formData.email || !formData.password) {
             return Swal.fire({
                 icon: 'error',
@@ -49,13 +48,13 @@ const Login = () => {
                     JSON.stringify(result.token)
                 )
 
-                // Aggiungi nome utente nel messaggio di benvenuto
                 Swal.fire({
                     icon: 'success',
                     title: `Benvenuto su EpicBook, ${result.user.name}!`,
+                }).then(() => {
+                    closeDrawer() // Chiude il Drawer dopo il messaggio di benvenuto
+                    navigate('/') // Naviga alla homepage
                 })
-
-                navigate('/') // Naviga alla homepage
             } else {
                 Swal.fire({
                     icon: 'error',

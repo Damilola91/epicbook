@@ -21,6 +21,11 @@ const NavbarCustom = () => {
         setIsOpen(!isOpen)
     }
 
+    // Funzione per chiudere il Drawer
+    const closeDrawer = () => {
+        setIsOpen(false)
+    }
+
     return (
         <>
             <Navbar
@@ -117,7 +122,8 @@ const NavbarCustom = () => {
                 size={350}
             >
                 <div className="drawer-content">
-                    <Login />
+                    <Login closeDrawer={closeDrawer} />{' '}
+                    {/* Passa la funzione closeDrawer */}
                 </div>
             </Drawer>
         </>
