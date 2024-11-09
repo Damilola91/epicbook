@@ -48,13 +48,17 @@ const Login = ({ closeDrawer }) => {
                     JSON.stringify(result.token)
                 )
 
-                Swal.fire({
-                    icon: 'success',
-                    title: `Benvenuto su EpicBook, ${result.user.name}!`,
-                }).then(() => {
-                    closeDrawer() // Chiude il Drawer dopo il messaggio di benvenuto
+                // Chiudi il Drawer immediatamente
+                closeDrawer()
+
+                // Mostra il messaggio di benvenuto con un ritardo di 200ms
+                setTimeout(() => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: `Benvenuto su EpicBook, ${result.user.name}!`,
+                    })
                     navigate('/') // Naviga alla homepage
-                })
+                }, 200)
             } else {
                 Swal.fire({
                     icon: 'error',
