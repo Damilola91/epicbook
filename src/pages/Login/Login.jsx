@@ -24,6 +24,10 @@ const Login = ({ closeDrawer }) => {
                 icon: 'error',
                 title: 'Errore',
                 text: 'Inserisci email e password',
+                customClass: {
+                    popup: 'swal-popup', // Usa la classe personalizzata per il popup
+                },
+                zIndex: 999999, // Imposta un valore molto alto
             })
         }
 
@@ -56,6 +60,10 @@ const Login = ({ closeDrawer }) => {
                     Swal.fire({
                         icon: 'success',
                         title: `Benvenuto su EpicBook, ${result.user.name}!`,
+                        customClass: {
+                            popup: 'swal-popup', // Usa la classe personalizzata per il popup
+                        },
+                        zIndex: 999999, // Mostra il messaggio sopra il Drawer
                     })
                     navigate('/') // Naviga alla homepage
                 }, 200)
@@ -64,6 +72,10 @@ const Login = ({ closeDrawer }) => {
                     icon: 'error',
                     title: 'Errore di Login',
                     text: result.message || 'Credenziali non valide',
+                    customClass: {
+                        popup: 'swal-popup', // Usa la classe personalizzata per il popup
+                    },
+                    zIndex: 999999, // Mostra il messaggio sopra il Drawer
                 })
             }
         } catch (error) {
@@ -72,6 +84,10 @@ const Login = ({ closeDrawer }) => {
                 icon: 'error',
                 title: 'Errore di rete',
                 text: 'Si è verificato un errore durante il login. Riprova più tardi.',
+                customClass: {
+                    popup: 'swal-popup', // Usa la classe personalizzata per il popup
+                },
+                zIndex: 999999, // Posiziona l'errore sopra il Drawer
             })
         } finally {
             setIsSubmitting(false)

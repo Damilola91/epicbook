@@ -118,12 +118,11 @@ const NavbarCustom = () => {
                 onClose={toggleDrawer}
                 direction="left"
                 className="drawer"
-                style={{ zIndex: 9999 }}
+                style={{ zIndex: 999 }} // Imposta un valore di z-index più basso
                 size={350}
             >
                 <div className="drawer-content">
-                    <Login closeDrawer={closeDrawer} />{' '}
-                    {/* Passa la funzione closeDrawer */}
+                    <Login closeDrawer={closeDrawer} />
                 </div>
             </Drawer>
         </>
