@@ -16,9 +16,11 @@ const NavbarCustom = () => {
     const { isDarkMode, toggleThemeMode } = useContext(ThemeContext)
 
     const [isOpen, setIsOpen] = useState(false)
+    const [expanded, setExpanded] = useState(false) // Stato per gestire la Navbar
 
     const toggleDrawer = () => {
         setIsOpen(!isOpen)
+        setExpanded(false) // Chiudi la Navbar quando apri il Drawer
     }
 
     // Funzione per chiudere il Drawer
@@ -33,6 +35,7 @@ const NavbarCustom = () => {
                 bg={isDarkMode ? 'dark' : 'light'}
                 expand="lg"
                 className="d-flex justify-content-between sticky-top"
+                expanded={expanded} // Gestisci lo stato della Navbar
             >
                 <Container>
                     <Button
@@ -53,7 +56,10 @@ const NavbarCustom = () => {
                     </Navbar.Brand>
 
                     {/* Toggle per modalità mobile */}
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Toggle
+                        aria-controls="basic-navbar-nav"
+                        onClick={() => setExpanded(!expanded)} // Gestisci il toggle
+                    />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             {navLinks.map((link) => (
