@@ -4,7 +4,8 @@ import Swal from 'sweetalert2'
 import './Login.css'
 
 const Login = () => {
-    const [formData, setFormData] = useState({})
+    const [formData, setFormData] = useState({ email: '', password: '' })
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const navigate = useNavigate()
 
     const handleInput = (event) => {
@@ -17,6 +18,18 @@ const Login = () => {
 
     const onSubmit = async (event) => {
         event.preventDefault()
+
+        // Validazione lato client
+        if (!formData.email || !formData.password) {
+            return Swal.fire({
+                icon: 'error',
+                title: 'Errore',
+                text: 'Inserisci email e password',
+            })
+        }
+
+        setIsSubmitting(true)
+
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_SERVER_BASE_URL}/login`,
@@ -29,22 +42,36 @@ const Login = () => {
                 }
             )
 
+            const result = await response.json()
             if (response.ok) {
-                const result = await response.json()
                 localStorage.setItem(
                     'Authorization',
                     JSON.stringify(result.token)
                 )
 
-                Swal.fire('Welcome To EpicBook')
+                // Aggiungi nome utente nel messaggio di benvenuto
+                Swal.fire({
+                    icon: 'success',
+                    title: `Benvenuto su EpicBook, ${result.user.name}!`,
+                })
 
                 navigate('/') // Naviga alla homepage
             } else {
-                alert(`Errore: ${result.message}`)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Errore di Login',
+                    text: result.message || 'Credenziali non valide',
+                })
             }
         } catch (error) {
             console.error('Errore di login:', error)
-            alert('Si è verificato un errore durante il login.')
+            Swal.fire({
+                icon: 'error',
+                title: 'Errore di rete',
+                text: 'Si è verificato un errore durante il login. Riprova più tardi.',
+            })
+        } finally {
+            setIsSubmitting(false)
         }
     }
 
@@ -62,6 +89,7 @@ const Login = () => {
                     placeholder="Email"
                     name="email"
                     type="email"
+                    value={formData.email}
                 />
                 <input
                     className="login-input"
@@ -69,9 +97,14 @@ const Login = () => {
                     placeholder="Password"
                     name="password"
                     type="password"
+                    value={formData.password}
                 />
-                <button type="submit" className="login-button">
-                    Invia
+                <button
+                    type="submit"
+                    className="login-button"
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? 'Caricamento...' : 'Invia'}
                 </button>
             </form>
 
