@@ -17,7 +17,6 @@ const App = () => {
         <BrowserRouter>
             <Routes>
                 <Route exact path="/" element={<HomePage />} />
-                <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/success" element={<SuccessLoginPage />} />
                 <Route element={<ProtectedRoutes />}>

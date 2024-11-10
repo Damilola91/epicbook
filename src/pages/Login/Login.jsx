@@ -52,20 +52,18 @@ const Login = ({ closeDrawer }) => {
                     JSON.stringify(result.token)
                 )
 
-                // Chiudi il Drawer immediatamente
                 closeDrawer()
 
-                // Mostra il messaggio di benvenuto con un ritardo di 200ms
                 setTimeout(() => {
                     Swal.fire({
                         icon: 'success',
                         title: `Benvenuto su EpicBook, ${result.user.name}!`,
                         customClass: {
-                            popup: 'swal-popup', // Usa la classe personalizzata per il popup
+                            popup: 'swal-popup',
                         },
-                        zIndex: 999999, // Mostra il messaggio sopra il Drawer
+                        zIndex: 999999,
                     })
-                    navigate('/') // Naviga alla homepage
+                    navigate('/')
                 }, 200)
             } else {
                 Swal.fire({
@@ -73,9 +71,9 @@ const Login = ({ closeDrawer }) => {
                     title: 'Errore di Login',
                     text: result.message || 'Credenziali non valide',
                     customClass: {
-                        popup: 'swal-popup', // Usa la classe personalizzata per il popup
+                        popup: 'swal-popup',
                     },
-                    zIndex: 999999, // Mostra il messaggio sopra il Drawer
+                    zIndex: 999999,
                 })
             }
         } catch (error) {
@@ -85,9 +83,9 @@ const Login = ({ closeDrawer }) => {
                 title: 'Errore di rete',
                 text: 'Si è verificato un errore durante il login. Riprova più tardi.',
                 customClass: {
-                    popup: 'swal-popup', // Usa la classe personalizzata per il popup
+                    popup: 'swal-popup',
                 },
-                zIndex: 999999, // Posiziona l'errore sopra il Drawer
+                zIndex: 999999,
             })
         } finally {
             setIsSubmitting(false)
