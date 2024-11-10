@@ -50,11 +50,27 @@
 }
 
 .cartItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px;
   margin-bottom: 10px;
+}
+
+/* Dettagli dell'articolo nel carrello */
+.cartItemDetails {
+  flex: 1;
+}
+
+/* Stile per l'immagine del libro */
+.cartItemImage {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+  margin-left: 20px;
 }
 
 .cartItemTitle {
@@ -124,15 +140,14 @@
   transition: background-color 0.3s;
 }
 
-/* Colore del pulsante al passaggio del mouse */
 .incrementButton:hover,
 .decrementButton:hover {
-  background-color: #0056b3; /* Colore più scuro al passaggio del mouse */
+  background-color: #0056b3;
 }
 
 /* Pulsante disabilitato */
 .decrementButton:disabled {
-  background-color: #cccccc; /* Grigio per i pulsanti disabilitati */
+  background-color: #cccccc;
   cursor: not-allowed;
 }
 

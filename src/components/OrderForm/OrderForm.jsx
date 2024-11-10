@@ -74,35 +74,46 @@ const OrderForm = () => {
                     <h2 className={styles.cartTitle}>Carrello</h2>
                     {cart.map((item) => (
                         <div key={item._id} className={styles.cartItem}>
-                            <h4 className={styles.cartItemTitle}>
-                                {item.title}
-                            </h4>
-                            <p>
-                                Prezzo unitario: €
-                                {parseFloat(item.price).toFixed(2)}
-                            </p>
-                            <div className={styles.quantityControls}>
-                                <button
-                                    onClick={() => decrementQuantity(item._id)}
-                                    disabled={item.quantity <= 1}
-                                    className={styles.decrementButton}
-                                >
-                                    -
-                                </button>
-                                <span>{item.quantity}</span>
-                                <button
-                                    onClick={() => incrementQuantity(item._id)}
-                                    className={styles.incrementButton}
-                                >
-                                    +
-                                </button>
+                            <div className={styles.cartItemDetails}>
+                                <h4 className={styles.cartItemTitle}>
+                                    {item.title}
+                                </h4>
+                                <p>
+                                    Prezzo unitario: €
+                                    {parseFloat(item.price).toFixed(2)}
+                                </p>
+                                <div className={styles.quantityControls}>
+                                    <button
+                                        onClick={() =>
+                                            decrementQuantity(item._id)
+                                        }
+                                        disabled={item.quantity <= 1}
+                                        className={styles.decrementButton}
+                                    >
+                                        -
+                                    </button>
+                                    <span>{item.quantity}</span>
+                                    <button
+                                        onClick={() =>
+                                            incrementQuantity(item._id)
+                                        }
+                                        className={styles.incrementButton}
+                                    >
+                                        +
+                                    </button>
+                                </div>
+                                <p>
+                                    Prezzo totale: €
+                                    {(
+                                        parseFloat(item.price) * item.quantity
+                                    ).toFixed(2)}
+                                </p>
                             </div>
-                            <p>
-                                Prezzo totale: €
-                                {(
-                                    parseFloat(item.price) * item.quantity
-                                ).toFixed(2)}
-                            </p>
+                            <img
+                                src={item.img}
+                                alt={item.title}
+                                className={styles.cartItemImage}
+                            />
                         </div>
                     ))}
                     <div className={styles.paymentSection}>
