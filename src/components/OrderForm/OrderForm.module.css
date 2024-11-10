@@ -100,3 +100,45 @@
   margin-bottom: 20px;
   background: #fff;
 }
+
+/* Stile per il contenitore dei controlli di quantità */
+.quantityControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Stile per i pulsanti di incremento e decremento */
+.incrementButton,
+.decrementButton {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: #007bff; /* Colore di sfondo blu */
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Colore del pulsante al passaggio del mouse */
+.incrementButton:hover,
+.decrementButton:hover {
+  background-color: #0056b3; /* Colore più scuro al passaggio del mouse */
+}
+
+/* Pulsante disabilitato */
+.decrementButton:disabled {
+  background-color: #cccccc; /* Grigio per i pulsanti disabilitati */
+  cursor: not-allowed;
+}
+
+/* Stile per il display della quantità */
+.quantityControls span {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}

@@ -1,18 +1,17 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
-import { useContext } from 'react'
 import { CartContext } from '../contexts/CartContext'
 import styles from './OrderForm.module.css'
 import useSession from '../../hooks/useSession'
 
 const OrderForm = () => {
-    const { cart } = useContext(CartContext)
+    const { cart, incrementQuantity, decrementQuantity } =
+        useContext(CartContext)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [orderMessage, setOrderMessage] = useState('')
 
     const stripe = useStripe()
     const elements = useElements()
-
     const session = useSession()
 
     const handleSubmitOrder = async () => {
@@ -82,7 +81,22 @@ const OrderForm = () => {
                                 Prezzo unitario: €
                                 {parseFloat(item.price).toFixed(2)}
                             </p>
-                            <p>Quantità: {item.quantity}</p>
+                            <div className={styles.quantityControls}>
+                                <button
+                                    onClick={() => decrementQuantity(item._id)}
+                                    disabled={item.quantity <= 1}
+                                    className={styles.decrementButton}
+                                >
+                                    -
+                                </button>
+                                <span>{item.quantity}</span>
+                                <button
+                                    onClick={() => incrementQuantity(item._id)}
+                                    className={styles.incrementButton}
+                                >
+                                    +
+                                </button>
+                            </div>
                             <p>
                                 Prezzo totale: €
                                 {(
