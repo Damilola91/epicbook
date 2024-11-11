@@ -170,9 +170,9 @@ const Login = ({ closeDrawer }) => {
                 </button>
             )}
 
-            {/* <button onClick={redirectToGoogle} className="login-button">
+            <button onClick={redirectToGoogle} className="login-button">
                 Login with Google
-            </button>*/}
+            </button>
         </div>
     )
 }
