@@ -16,12 +16,12 @@ const App = () => {
         <BrowserRouter>
             <Routes>
                 <Route exact path="/" element={<HomePage />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/success/:token" element={<SuccessLoginPage />} />
+                <Route path="/success" element={<SuccessLoginPage />} />
                 <Route element={<ProtectedRoutes />}>
                     <Route path="/bookDay" element={<BookOfTheDay />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/book/:bookId" element={<BookDetails />} />
+                    <Route path="/register" element={<Register />} />
                     <Route path="/order" element={<WrappedOrderForm />} />
                 </Route>
                 <Route path="*" element={<NotFoundPage />} />

@@ -8,10 +8,10 @@ const SuccessLoginPage = () => {
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search)
         const token = searchParams.get('token')
-        console.log('Token ricevuto:', token) // Per verificare il token
+        console.log('Token ricevuto:', token)
 
         if (token) {
-            localStorage.setItem('auth', JSON.stringify(token))
+            localStorage.setItem('Authorization', JSON.stringify(token))
             setTimeout(() => {
                 navigate('/')
             }, 1000)
