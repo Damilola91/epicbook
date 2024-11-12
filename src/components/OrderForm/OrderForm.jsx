@@ -3,9 +3,10 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { CartContext } from '../contexts/CartContext'
 import styles from './OrderForm.module.css'
 import useSession from '../../hooks/useSession'
+import { UilTrash } from '@iconscout/react-unicons' // Import dell'icona
 
 const OrderForm = () => {
-    const { cart, incrementQuantity, decrementQuantity } =
+    const { cart, incrementQuantity, decrementQuantity, removeFromCart } =
         useContext(CartContext)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [orderMessage, setOrderMessage] = useState('')
@@ -108,6 +109,13 @@ const OrderForm = () => {
                                         parseFloat(item.price) * item.quantity
                                     ).toFixed(2)}
                                 </p>
+                                <button
+                                    onClick={() => removeFromCart(item._id)}
+                                    className={styles.removeButton}
+                                    aria-label="Rimuovi elemento"
+                                >
+                                    <UilTrash size="24" color="#ff4d4f" />
+                                </button>
                             </div>
                             <img
                                 src={item.img}

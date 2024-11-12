@@ -139,40 +139,42 @@ const Login = ({ closeDrawer }) => {
             <h1 className="login-title">EpicBook</h1>
 
             {!isAuthenticated ? (
-                <form onSubmit={onSubmit} className="login-form">
-                    <input
-                        className="login-input"
-                        onChange={handleInput}
-                        placeholder="Email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                    />
-                    <input
-                        className="login-input"
-                        onChange={handleInput}
-                        placeholder="Password"
-                        name="password"
-                        type="password"
-                        value={formData.password}
-                    />
-                    <button
-                        type="submit"
-                        className="login-button"
-                        disabled={isSubmitting}
-                    >
-                        {isSubmitting ? 'Caricamento...' : 'Invia'}
+                <>
+                    <form onSubmit={onSubmit} className="login-form">
+                        <input
+                            className="login-input"
+                            onChange={handleInput}
+                            placeholder="Email"
+                            name="email"
+                            type="email"
+                            value={formData.email}
+                        />
+                        <input
+                            className="login-input"
+                            onChange={handleInput}
+                            placeholder="Password"
+                            name="password"
+                            type="password"
+                            value={formData.password}
+                        />
+                        <button
+                            type="submit"
+                            className="login-button"
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? 'Caricamento...' : 'Invia'}
+                        </button>
+                    </form>
+
+                    <button onClick={redirectToGoogle} className="login-button">
+                        Login with Google
                     </button>
-                </form>
+                </>
             ) : (
                 <button onClick={handleLogout} className="logout-button">
                     Logout
                 </button>
             )}
-
-            <button onClick={redirectToGoogle} className="login-button">
-                Login with Google
-            </button>
         </div>
     )
 }

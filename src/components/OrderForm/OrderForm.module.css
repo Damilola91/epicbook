@@ -157,3 +157,24 @@
   font-weight: bold;
   color: #333;
 }
+
+.removeButton {
+  background: none; /* Rimuove lo sfondo predefinito */
+  border: none; /* Rimuove il bordo */
+  cursor: pointer; /* Cambia il cursore quando si passa sopra */
+  padding: 8px; /* Aggiunge un po' di spazio intorno all'icona */
+  border-radius: 50%; /* Arrotonda il bottone */
+  transition: background-color 0.3s ease; /* Aggiunge una transizione morbida */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeButton:hover {
+  background-color: #ffe6e6; /* Cambia lo sfondo al passaggio del mouse */
+}
+
+.removeButton:active {
+  background-color: #ffcccc; /* Cambia lo sfondo quando è cliccato */
+}
