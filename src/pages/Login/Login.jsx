@@ -169,6 +169,12 @@ const Login = ({ closeDrawer }) => {
                     <button onClick={redirectToGoogle} className="login-button">
                         Login with Google
                     </button>
+                    <p
+                        className="register-link"
+                        onClick={() => navigate('/register')}
+                    >
+                        Registrati
+                    </p>
                 </>
             ) : (
                 <button onClick={handleLogout} className="logout-button">

@@ -78,7 +78,7 @@ const Register = () => {
                 title: 'Successo!',
                 text: 'Utente registrato correttamente!',
             }).then(() => {
-                navigate('/home')
+                navigate('/')
             })
         } catch (error) {
             Swal.fire({

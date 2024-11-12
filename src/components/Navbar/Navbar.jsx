@@ -16,14 +16,13 @@ const NavbarCustom = () => {
     const { isDarkMode, toggleThemeMode } = useContext(ThemeContext)
 
     const [isOpen, setIsOpen] = useState(false)
-    const [expanded, setExpanded] = useState(false) // Stato per gestire la Navbar
+    const [expanded, setExpanded] = useState(false)
 
     const toggleDrawer = () => {
         setIsOpen(!isOpen)
-        setExpanded(false) // Chiudi la Navbar quando apri il Drawer
+        setExpanded(false)
     }
 
-    // Funzione per chiudere il Drawer
     const closeDrawer = () => {
         setIsOpen(false)
     }
@@ -35,7 +34,7 @@ const NavbarCustom = () => {
                 bg={isDarkMode ? 'dark' : 'light'}
                 expand="lg"
                 className="d-flex justify-content-between sticky-top"
-                expanded={expanded} // Gestisci lo stato della Navbar
+                expanded={expanded}
             >
                 <Container>
                     <Button
@@ -55,11 +54,11 @@ const NavbarCustom = () => {
                         </Link>
                     </Navbar.Brand>
 
-                    {/* Toggle per modalità mobile */}
                     <Navbar.Toggle
                         aria-controls="basic-navbar-nav"
-                        onClick={() => setExpanded(!expanded)} // Gestisci il toggle
+                        onClick={() => setExpanded(!expanded)}
                     />
+
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             {navLinks.map((link) => (
@@ -67,10 +66,6 @@ const NavbarCustom = () => {
                                     {link.text}
                                 </Nav.Link>
                             ))}
-
-                            <Nav.Link as={Link} to="/register" className="ms-3">
-                                Registrati
-                            </Nav.Link>
                         </Nav>
 
                         <Form
@@ -95,15 +90,6 @@ const NavbarCustom = () => {
                             </Row>
                         </Form>
 
-                        {/* Icona del carrello */}
-                        <Link to="/order" className="ms-3">
-                            <UilShoppingCart
-                                size={24}
-                                color={isDarkMode ? 'white' : 'black'}
-                            />
-                        </Link>
-
-                        {/* Bottone per aprire il login nella sidebar con icona */}
                         <Button
                             variant="secondary"
                             onClick={toggleDrawer}
@@ -115,16 +101,25 @@ const NavbarCustom = () => {
                             />
                         </Button>
                     </Navbar.Collapse>
+
+                    {/* Link del carrello fuori Navbar.Collapse, visibile solo se il menu è chiuso */}
+                    {!expanded && (
+                        <Link to="/order" className="ms-3">
+                            <UilShoppingCart
+                                size={24}
+                                color={isDarkMode ? 'white' : 'black'}
+                            />
+                        </Link>
+                    )}
                 </Container>
             </Navbar>
 
-            {/* Drawer per il Login */}
             <Drawer
                 open={isOpen}
                 onClose={toggleDrawer}
                 direction="left"
                 className="drawer"
-                style={{ zIndex: 999 }} // Imposta un valore di z-index più basso
+                style={{ zIndex: 999 }}
                 size={350}
             >
                 <div className="drawer-content">
