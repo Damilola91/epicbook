@@ -4,6 +4,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 import Footer from '../../components/Footer/Footer'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
+import './About.css'
 
 const About = () => {
     const [userEmail, setUserEmail] = useState('')

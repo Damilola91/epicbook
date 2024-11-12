@@ -1,33 +1,115 @@
+/* Stile principale per il contenitore della sezione contatti */
 .contact-container {
-    margin-top: 100px  !important;
-    max-width: 75vw;
-    max-height: 75vh;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    margin: auto; /* Centra orizzontalmente */
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  margin: 0 auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
 }
 
+.contact-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Titolo "Contattaci" */
 .contact-container h2 {
-    color: #343a40;
-    font-weight: bold;
-  }
-  
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  color: #333;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+/* Testo introduttivo */
+.contact-container p {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* Stile per le etichette dei campi */
 .contact-container .form-label {
-    font-weight: 600;
-  }
-  
+  font-weight: bold;
+  color: #555;
+  font-size: 1rem;
+  text-align: left;
+  display: block;
+}
+
+/* Contenitore del form per centrare */
+.contact-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Campi di input */
+.contact-container .form-control {
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #333;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+.contact-container .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+/* Pulsante di invio */
 .contact-container .btn-primary {
-    background-color: #007bff;
-    border: none;
-  }
-  
+  background-color: #007bff;
+  border-color: #007bff;
+  font-size: 1.2rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 100%;
+  max-width: 400px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
 .contact-container .btn-primary:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+/* Messaggio di stato */
+.contact-container .text-success {
+  font-size: 1rem;
+  color: #28a745;
+  margin-top: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Responsive per la disposizione in dispositivi più piccoli */
+@media (max-width: 576px) {
+  .contact-container {
+      padding: 1.5rem;
   }
-  
-.text-success {
-    font-weight: 500;
-    font-size: 1rem;
+
+  .contact-container h2 {
+      font-size: 1.8rem;
   }
+
+  .contact-container .btn-primary {
+      font-size: 1.1rem;
+      padding: 0.6rem;
+  }
+}
