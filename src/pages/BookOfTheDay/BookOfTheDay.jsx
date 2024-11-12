@@ -1,10 +1,10 @@
-// BookOfTheDay.js
 import { useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import NavbarCustom from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
 import BookForm from '../../components/BookForm/BookForm'
 import BookCardForm from '../../components/BookCardForm/BookCardForm'
+import './BookOfTheDay.css'
 
 const BookOfTheDay = () => {
     const [book, setBook] = useState(null)
@@ -35,7 +35,6 @@ const BookOfTheDay = () => {
         if (file) {
             try {
                 const uploadedImageUrl = await uploadFile(file)
-
                 const postFormData = {
                     ...formData,
                     img: uploadedImageUrl,
@@ -67,13 +66,12 @@ const BookOfTheDay = () => {
     return (
         <>
             <NavbarCustom />
-            <Container className="py-4">
+            <Container className="book-of-the-day-container">
                 <Row>
-                    <Col md={6} className="mb-4">
+                    <Col md={6} className="left-column">
                         <h2>Crea un libro</h2>
                         <BookForm onCreateBook={createBook} />
                     </Col>
-
                     <Col
                         md={6}
                         className="d-flex align-items-center justify-content-center"
