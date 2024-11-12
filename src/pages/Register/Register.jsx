@@ -5,6 +5,7 @@ import PersonalInfo from './PersonalInfo/PersonalInfo'
 import AccountInfo from './AccountInfo/AccountInfo'
 import AdditionalInfo from './AdditionalInfo/AdditionalInfo'
 import Swal from 'sweetalert2'
+import './Register.css'
 
 const Register = () => {
     const navigate = useNavigate()
@@ -90,7 +91,7 @@ const Register = () => {
     }
 
     return (
-        <Container className="mt-5">
+        <Container className="register-form-container mt-5">
             <Row className="justify-content-center">
                 <Col md={8} lg={6}>
                     <h2 className="text-center mb-4">

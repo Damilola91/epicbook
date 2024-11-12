@@ -1,75 +1,91 @@
-/* Container principale per il form */
-.container {
-    max-width: 600px;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+/* Container principale per il form di registrazione */
+.register-form-container {
+    max-width: 700px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    transition: all 0.3s ease-in-out;
 }
 
 /* Titolo del form */
-h2 {
-    font-family: Arial, sans-serif;
-    font-weight: bold;
+.register-form-container h2 {
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
     color: #333;
     text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
 }
 
-/* Spaziatura e stile dei gruppi del form */
-.form-group {
-    margin-bottom: 1.5rem;
+/* Form fields */
+.register-form-container .form-group {
+    margin-bottom: 1.75rem;
 }
 
-/* Stile per gli input */
-.form-control {
+/* Stile per gli input e i selettori */
+.register-form-container .form-control,
+.register-form-container .form-select {
     font-size: 1em;
-    padding: 0.75rem;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    width: 100%;
+    transition: all 0.3s ease;
 }
 
-/* Stile per la dropdown dei generi */
-.form-select {
-    font-size: 1em;
-    padding: 0.75rem;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
+.register-form-container .form-control:focus,
+.register-form-container .form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+    background-color: #fff;
+    outline: none;
+}
+
+/* Stile per i messaggi di errore */
+.register-form-container .invalid-feedback {
+    color: #e74c3c;
+    font-size: 0.9rem;
 }
 
 /* Stile per il bottone di submit */
-button[type="submit"] {
-    background-color: #007bff;
+.register-form-container button[type="submit"] {
+    background: linear-gradient(135deg, #007bff, #0056b3);
     color: #fff;
-    font-size: 1.2em;
+    font-size: 1.1rem;
     font-weight: bold;
-    padding: 0.75rem;
+    padding: 0.85rem 1.5rem;
     border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
 }
 
-/* Hover e focus per il bottone */
-button[type="submit"]:hover {
-    background-color: #0056b3;
+.register-form-container button[type="submit"]:hover {
+    background: linear-gradient(135deg, #0056b3, #004085);
+    transform: translateY(-2px);
 }
 
-button[type="submit"]:focus {
-    background-color: #004085;
-    outline: none;
+.register-form-container button[type="submit"]:active {
+    background: linear-gradient(135deg, #004085, #003366);
+    transform: translateY(1px);
 }
 
 /* Per migliorare la spaziatura e la disposizione degli elementi nei dispositivi mobili */
 @media (max-width: 576px) {
-    .container {
-        padding: 10px;
+    .register-form-container {
+        padding: 20px;
     }
 
-    h2 {
-        font-size: 1.5em;
+    .register-form-container h2 {
+        font-size: 2rem;
     }
 
-    button[type="submit"] {
-        font-size: 1em;
-        padding: 0.5rem;
+    .register-form-container button[type="submit"] {
+        font-size: 1rem;
+        padding: 0.75rem;
     }
 }
