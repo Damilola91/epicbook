@@ -3,17 +3,29 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { CartContext } from '../contexts/CartContext'
 import styles from './OrderForm.module.css'
 import useSession from '../../hooks/useSession'
-import { UilTrash } from '@iconscout/react-unicons' // Import dell'icona
+import { UilTrash } from '@iconscout/react-unicons'
 
 const OrderForm = () => {
     const { cart, incrementQuantity, decrementQuantity, removeFromCart } =
         useContext(CartContext)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [orderMessage, setOrderMessage] = useState('')
+    const [isConfirmed, setIsConfirmed] = useState(false)
 
     const stripe = useStripe()
     const elements = useElements()
     const session = useSession()
+
+    const cartTotal = cart
+        .reduce(
+            (total, item) => total + parseFloat(item.price) * item.quantity,
+            0
+        )
+        .toFixed(2)
+
+    const handleConfirmOrder = () => {
+        setIsConfirmed(true)
+    }
 
     const handleSubmitOrder = async () => {
         if (!stripe || !elements) return
@@ -125,17 +137,29 @@ const OrderForm = () => {
                         </div>
                     ))}
                     <div className={styles.paymentSection}>
-                        <h3>Pagamento</h3>
-                        <CardElement className={styles.cardElement} />
+                        <h3>Totale carrello: €{cartTotal}</h3>
                     </div>
 
-                    <button
-                        onClick={handleSubmitOrder}
-                        disabled={isSubmitting}
-                        className={styles.button}
-                    >
-                        {isSubmitting ? 'Inviando...' : 'Invia Ordine'}
-                    </button>
+                    {!isConfirmed ? (
+                        <button
+                            onClick={handleConfirmOrder}
+                            className={styles.button}
+                        >
+                            Acquista (€{cartTotal})
+                        </button>
+                    ) : (
+                        <>
+                            <h3>Pagamento</h3>
+                            <CardElement className={styles.cardElement} />
+                            <button
+                                onClick={handleSubmitOrder}
+                                disabled={isSubmitting}
+                                className={styles.button}
+                            >
+                                {isSubmitting ? 'Inviando...' : 'Pagamento'}
+                            </button>
+                        </>
+                    )}
                 </>
             ) : (
                 <p>Il carrello è vuoto!</p>
