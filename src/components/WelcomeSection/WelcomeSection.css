@@ -1,16 +1,104 @@
+.welcome-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-section .container {
+    position: relative;
+    z-index: 1;
+}
+
 .custom-img img {
-    height: 500px;
-    width: 333px;
+    width: 50%; 
+    height: 300px;
+    object-fit: cover; 
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out;
 }
 
-.dark-bg {
-    background-color: #333; /* Colore di sfondo per dark mode */
+
+.custom-img img:hover {
+    transform: scale(1.05);
 }
 
-.text-light {
-    color: white; /* Colore del testo per dark mode */
+
+.welcome-section.bg-dark {
+    background: linear-gradient(135deg, #232526, #414345);
 }
 
-.text-dark {
-    color: black; /* Colore del testo per light mode */
+
+.welcome-section.bg-light {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
+.welcome-section h1 {
+    font-size: 3rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-section .lead {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.welcome-section .category {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #ff6347;
+}
+
+.bg-dark .text-light {
+    color: #ffffff;
+}
+
+.bg-light .text-dark {
+    color: #343a40;
+}
+
+.welcome-section .col-lg-12:hover .text-light {
+    color: #ffffff !important;
+}
+
+.welcome-section .col-lg-12:hover .text-dark {
+    color: #f8f9fa !important;
+}
+
+.welcome-section .container {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.welcome-section .row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-section .col-lg-12 {
+    text-align: center;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+
+.welcome-section .col-lg-12:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    transform: scale(1.02);
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .welcome-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .welcome-section .lead {
+        font-size: 1.1rem;
+    }
+
+    .custom-img img {
+        height: 250px;
+    }
 }

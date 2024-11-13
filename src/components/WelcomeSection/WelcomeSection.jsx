@@ -3,7 +3,7 @@ import { BookContext } from '../contexts/BookContext'
 import './WelcomeSection.css'
 import { ThemeContext } from '../contexts/ThemeContext'
 
-const WelcomeSection = ({ sweetAlert }) => {
+const WelcomeSection = () => {
     const { allBooks: books } = useContext(BookContext)
     const { isDarkMode } = useContext(ThemeContext)
     const [randomBook, setRandomBook] = useState(null)
@@ -13,17 +13,17 @@ const WelcomeSection = ({ sweetAlert }) => {
             const randomIndex = Math.floor(Math.random() * books.books.length)
             setRandomBook(books.books[randomIndex])
         }
-    }, [books]) // Aggiungi books come dipendenza
+    }, [books])
 
     return (
         <div
-            className={`text-center py-5 ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
+            className={`welcome-section text-center py-5 ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
         >
             <div className="container pt-5 pb-5">
                 <div className="row pt-5 pb-5">
                     <div className="col-lg-12 col-xl-12 ms-auto pb-5 pt-5">
                         <span
-                            className={isDarkMode ? 'text-light' : 'text-dark'}
+                            className={`category ${isDarkMode ? 'text-light' : 'text-dark'}`}
                         >
                             {randomBook?.category}
                         </span>
@@ -42,19 +42,6 @@ const WelcomeSection = ({ sweetAlert }) => {
                         >
                             {randomBook?.title}
                         </p>
-
-                        <div className="d-flex justify-content-center align-items-center gap-3">
-                            <button
-                                onClick={sweetAlert}
-                                className="btn btn-info text-white"
-                            >
-                                Acquista a: {randomBook?.price.$numberDecimal}£
-                            </button>
-
-                            <button className="btn btn-warning text-white">
-                                Dettagli
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
