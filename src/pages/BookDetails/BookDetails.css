@@ -17,7 +17,6 @@
 .book-img {
     height: 350px;
     object-fit: cover;
-   
 }
 
 .book-title {
@@ -32,6 +31,7 @@
     border-radius: 10px;
     max-height: 400px;
     overflow-y: auto;
+    margin-top: 1rem; /* Aggiungi un margine superiore per separare le card */
 }
 
 .comments-title {
@@ -54,7 +54,7 @@
     font-style: italic;
 }
 
-/* Modalità scura */
+
 .bg-dark .comments-card {
     background-color: #333;
     color: #fff;
@@ -64,4 +64,15 @@
 .bg-dark .book-card {
     background-color: #444;
     color: #fff;
+}
+
+
+@media (max-width: 768px) {
+    .book-card {
+        margin-bottom: 1rem; 
+    }
+    
+    .comments-card {
+        margin-top: 1.5rem; 
+    }
 }

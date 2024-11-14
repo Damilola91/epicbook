@@ -4,10 +4,16 @@ import { CartContext } from '../contexts/CartContext'
 import styles from './OrderForm.module.css'
 import useSession from '../../hooks/useSession'
 import { UilTrash } from '@iconscout/react-unicons'
+import { useNavigate } from 'react-router-dom'
 
 const OrderForm = () => {
-    const { cart, incrementQuantity, decrementQuantity, removeFromCart } =
-        useContext(CartContext)
+    const {
+        cart,
+        incrementQuantity,
+        decrementQuantity,
+        removeFromCart,
+        clearCart,
+    } = useContext(CartContext)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [orderMessage, setOrderMessage] = useState('')
     const [isConfirmed, setIsConfirmed] = useState(false)
@@ -15,6 +21,7 @@ const OrderForm = () => {
     const stripe = useStripe()
     const elements = useElements()
     const session = useSession()
+    const navigate = useNavigate()
 
     const cartTotal = cart
         .reduce(
@@ -67,6 +74,14 @@ const OrderForm = () => {
                 setOrderMessage(
                     'Ordine creato e pagamento effettuato con successo!'
                 )
+
+                // Svuotiamo il carrello
+                clearCart()
+
+                // Dopo un ritardo di 2 secondi, reindirizziamo l'utente
+                setTimeout(() => {
+                    navigate('/') // Reindirizza alla home page
+                }, 2000) // Ritardo di 2 secondi
             }
         } catch (error) {
             console.error("Errore nell'invio dell'ordine:", error)
