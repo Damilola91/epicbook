@@ -1,11 +1,12 @@
-import { Button, Col } from 'react-bootstrap'
-import Card from 'react-bootstrap/Card'
-import './BookCard.css'
 import { useContext } from 'react'
 import { ThemeContext } from '../contexts/ThemeContext'
 import { CommentSelectedCard } from '../contexts/CommentSelectedCard'
 import { CartContext } from '../contexts/CartContext'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import { Button, Col } from 'react-bootstrap'
+import Card from 'react-bootstrap/Card'
+import './BookCard.css'
 
 const BookCard = ({ price, category, title, img, asin, _id }) => {
     const { selectedCardAsin, toggleIsSelect } = useContext(CommentSelectedCard)
@@ -19,6 +20,13 @@ const BookCard = ({ price, category, title, img, asin, _id }) => {
 
     const handleAddToCart = () => {
         addToCart({ price, category, title, img, asin, _id })
+        Swal.fire({
+            icon: 'success',
+            title: 'Item added to cart',
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: { popup: 'swal-popup' },
+        })
     }
 
     const isSelected = selectedCardAsin === _id
@@ -52,8 +60,12 @@ const BookCard = ({ price, category, title, img, asin, _id }) => {
                     >
                         Details
                     </Button>
-                    <Button onClick={handleAddToCart}>Cart</Button>{' '}
-                    {/* Modifica il click handler */}
+                    <Button
+                        onClick={handleAddToCart}
+                        className="add-to-cart-button btn"
+                    >
+                        Add to Cart
+                    </Button>
                 </Card.Body>
             </Card>
         </Col>
