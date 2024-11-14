@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { UilGoogle } from '@iconscout/react-unicons'
 import './Login.css'
 
 const Login = ({ closeDrawer }) => {
@@ -166,14 +167,22 @@ const Login = ({ closeDrawer }) => {
                         </button>
                     </form>
 
-                    <button onClick={redirectToGoogle} className="login-button">
+                    <button
+                        onClick={redirectToGoogle}
+                        className="google-button"
+                    >
+                        <UilGoogle size="20" style={{ marginRight: '10px' }} />
                         Login with Google
                     </button>
-                    <p
-                        className="register-link"
-                        onClick={() => navigate('/register')}
-                    >
-                        Registrati
+
+                    <p className="register-prompt">
+                        Non sei registrato?{' '}
+                        <span
+                            className="register-link"
+                            onClick={() => navigate('/register')}
+                        >
+                            Registrati
+                        </span>
                     </p>
                 </>
             ) : (
